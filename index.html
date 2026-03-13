@@ -145,6 +145,96 @@
       margin-top: auto;
     }
 
+    /* ── STRENGTH CARD CLICKABLE ── */
+    #strengths .strength-card {
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    #strengths .strength-card:hover {
+      background: #efefed;
+    }
+
+    .card-cta {
+      font-size: 0.72rem;
+      letter-spacing: 0.15em;
+      color: var(--gray);
+      margin-top: auto;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--gray-light);
+      transition: color 0.2s;
+    }
+
+    #strengths .strength-card:hover .card-cta {
+      color: var(--black);
+    }
+
+    /* ── MODAL ── */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.55);
+      z-index: 200;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+
+    .modal-overlay.open {
+      display: flex;
+    }
+
+    .modal {
+      background: var(--white);
+      max-width: 560px;
+      width: 100%;
+      padding: 3rem;
+      position: relative;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 1.25rem;
+      right: 1.5rem;
+      background: none;
+      border: none;
+      font-size: 1.25rem;
+      cursor: pointer;
+      color: var(--gray);
+      line-height: 1;
+      transition: color 0.2s;
+    }
+
+    .modal-close:hover { color: var(--black); }
+
+    .modal-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 2.5rem;
+    }
+
+    .modal-block {
+      margin-bottom: 2rem;
+    }
+
+    .modal-label {
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gray);
+      margin-bottom: 0.5rem;
+    }
+
+    .modal-text {
+      font-size: 1rem;
+      color: var(--gray-dark);
+      line-height: 1.75;
+    }
+
     /* ── ABOUT ── */
     .about-body {
       max-width: 640px;
@@ -307,31 +397,34 @@
     <p class="section-eyebrow">Strengths</p>
     <div class="strengths-grid">
 
-      <div class="strength-card">
+      <div class="strength-card" data-modal="ai">
         <span class="strength-number">01</span>
         <h2 class="strength-title">AI 활용</h2>
         <p class="strength-desc">
           AI와 파이썬으로 업무 자동화 시스템을 직접 구축합니다.
           도구를 쓰는 것에서 그치지 않고, 내 손으로 만들어 문제를 해결합니다.
         </p>
+        <span class="card-cta">VIEW CASE →</span>
       </div>
 
-      <div class="strength-card">
+      <div class="strength-card" data-modal="problem">
         <span class="strength-number">02</span>
         <h2 class="strength-title">문제 해결</h2>
         <p class="strength-desc">
           비효율적인 구조를 그냥 지나치지 않습니다.
           왜 이렇게 되어 있는지를 먼저 묻고, 더 나은 방식을 찾아 실행합니다.
         </p>
+        <span class="card-cta">VIEW CASE →</span>
       </div>
 
-      <div class="strength-card">
+      <div class="strength-card" data-modal="content">
         <span class="strength-number">03</span>
         <h2 class="strength-title">콘텐츠 감각</h2>
         <p class="strength-desc">
           영상·마케팅 실무 경험을 바탕으로 콘텐츠 트렌드를 읽습니다.
           무엇이 사람들의 마음을 움직이는지 직관적으로 압니다.
         </p>
+        <span class="card-cta">VIEW CASE →</span>
       </div>
 
     </div>
@@ -349,11 +442,85 @@
     </div>
   </section>
 
+  <!-- MODAL -->
+  <div class="modal-overlay" id="modal-overlay">
+    <div class="modal" id="modal">
+      <button class="modal-close" id="modal-close">✕</button>
+      <h3 class="modal-title" id="modal-title"></h3>
+      <div class="modal-block">
+        <p class="modal-label">Problem</p>
+        <p class="modal-text" id="modal-problem"></p>
+      </div>
+      <div class="modal-block">
+        <p class="modal-label">Thinking</p>
+        <p class="modal-text" id="modal-thinking"></p>
+      </div>
+      <div class="modal-block">
+        <p class="modal-label">Solution</p>
+        <p class="modal-text" id="modal-solution"></p>
+      </div>
+    </div>
+  </div>
+
   <!-- FOOTER -->
   <footer>
     <span>© 2026 Phosynd</span>
     <span>Seoul, Korea</span>
   </footer>
 
+  <script>
+    const modalData = {
+      ai: {
+        title: 'AI 활용',
+        problem: '반복적인 업무가 너무 많아 시간이 낭비되고 있었다.',
+        thinking: '이건 코드가 해야 할 일이다. 파이썬과 AI를 독학해 자동화를 설계했다.',
+        solution: '실제 자동화 시스템 구현. (상세 내용 추가 예정)'
+      },
+      problem: {
+        title: '문제 해결',
+        problem: '기존 방식이 왜 비효율적인지 아무도 의문을 갖지 않았다.',
+        thinking: '구조 자체를 먼저 의심했다. 문제를 다시 정의하면 해결책이 달라진다.',
+        solution: '구조 재설계 후 실행. (상세 내용 추가 예정)'
+      },
+      content: {
+        title: '콘텐츠 감각',
+        problem: '조회수는 나오는데 브랜드 이미지로 연결되지 않았다.',
+        thinking: '사람이 움직이는 순간은 정보가 아니라 경험에서 온다.',
+        solution: '브랜드 스토리라인 재설계 후 콘텐츠 운영. (상세 내용 추가 예정)'
+      }
+    };
+
+    const overlay = document.getElementById('modal-overlay');
+    const modalClose = document.getElementById('modal-close');
+
+    function openModal(key) {
+      const d = modalData[key];
+      document.getElementById('modal-title').textContent = d.title;
+      document.getElementById('modal-problem').textContent = d.problem;
+      document.getElementById('modal-thinking').textContent = d.thinking;
+      document.getElementById('modal-solution').textContent = d.solution;
+      overlay.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+      overlay.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    document.querySelectorAll('#strengths .strength-card').forEach(card => {
+      card.addEventListener('click', () => openModal(card.dataset.modal));
+    });
+
+    modalClose.addEventListener('click', closeModal);
+
+    overlay.addEventListener('click', e => {
+      if (e.target === overlay) closeModal();
+    });
+
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') closeModal();
+    });
+  </script>
 </body>
 </html>
