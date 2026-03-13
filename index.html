@@ -85,6 +85,26 @@
     .hero-positioning {
       font-size: clamp(1rem, 2.2vw, 1.4rem);
       color: var(--gray-dark);
+    
+        .lang-toggle {
+          display: flex;
+          gap: 0.5rem;
+        }
+        .lang-btn {
+          background: var(--gray-light);
+          border: none;
+          padding: 0.4rem 1rem;
+          font-size: 0.8rem;
+          font-weight: 600;
+          cursor: pointer;
+          color: var(--gray);
+          border-radius: 2rem;
+          transition: background 0.2s, color 0.2s;
+        }
+        .lang-btn.active {
+          background: var(--black);
+          color: var(--white);
+        }
       font-weight: 400;
       max-width: 600px;
       line-height: 1.7;
@@ -97,6 +117,10 @@
       padding: 7rem 6%;
     }
 
+          <div class="lang-toggle" style="margin-left:2rem;">
+            <button id="lang-ko" class="lang-btn active">KO</button>
+            <button id="lang-en" class="lang-btn">EN</button>
+          </div>
     .section-eyebrow {
       font-size: 0.72rem;
       letter-spacing: 0.25em;
@@ -171,6 +195,90 @@
       display: flex;
       align-items: flex-end;
       justify-content: space-between;
+    <script>
+    // Language data
+    const langData = {
+      ko: {
+        navLogo: 'Gwanhyeok Choi',
+        navStrengths: '강점',
+        navAbout: 'About',
+        navContact: 'Contact',
+        heroName: '최관혁',
+        heroPositioning: '문제를 먼저 정의하고, AI로 직접 해결하는 사람.',
+        strengthsEyebrow: '강점',
+        strengthTitles: ['AI 활용', '문제 해결', '콘텐츠 감각'],
+        strengthDescs: [
+          'AI와 파이썬으로 업무 자동화 시스템을 직접 구축합니다.<br>도구를 쓰는 것에서 그치지 않고, 내 손으로 만들어 문제를 해결합니다.',
+          '비효율적인 구조를 그냥 지나치지 않습니다.<br>왜 이렇게 되어 있는지를 먼저 묻고, 더 나은 방식을 찾아 실행합니다.',
+          '영상·마케팅 실무 경험을 바탕으로 콘텐츠 트렌드를 읽습니다.<br>무엇이 사람들의 마음을 움직이는지 직관적으로 압니다.'
+        ],
+        aboutEyebrow: 'About',
+        aboutBody: '콘텐츠 마케터로 일하며 비효율을 발견했고, AI와 파이썬으로 직접 자동화 시스템을 만들어 해결했습니다.<br>좋은 기획은 화려한 아이디어가 아니라 정확한 문제 정의에서 온다고 믿습니다.',
+        contactEyebrow: 'Contact',
+        contactHeadline: '함께 일하고 싶다면<br>',
+        contactHeadlineSpan: '편하게 연락하세요.',
+        contactEmail: 'dennett0610@gmail.com',
+        footerLeft: '© 2026 최관혁',
+        footerRight: 'Seoul, Korea',
+      },
+      en: {
+        navLogo: 'Gwanhyeok Choi',
+        navStrengths: 'Strengths',
+        navAbout: 'About',
+        navContact: 'Contact',
+        heroName: 'Gwanhyeok Choi',
+        heroPositioning: 'Defining the problem first, and solving it with AI.',
+        strengthsEyebrow: 'Strengths',
+        strengthTitles: ['AI Utilization', 'Problem Solving', 'Content Sense'],
+        strengthDescs: [
+          'I build automation systems with AI and Python.<br>Not just using tools, but creating my own solutions.',
+          'I never overlook inefficient structures.<br>I ask why things are done this way, and find better approaches.',
+          'With hands-on experience in video and marketing, I read content trends.<br>I intuitively understand what moves people.'
+        ],
+        aboutEyebrow: 'About',
+        aboutBody: 'As a content marketer, I discovered inefficiencies and solved them by building automation systems with AI and Python.<br>I believe great planning comes from precise problem definition, not flashy ideas.',
+        contactEyebrow: 'Contact',
+        contactHeadline: 'If you want to work together<br>',
+        contactHeadlineSpan: 'Feel free to reach out.',
+        contactEmail: 'dennett0610@gmail.com',
+        footerLeft: '© 2026 Gwanhyeok Choi',
+        footerRight: 'Seoul, Korea',
+      }
+    };
+
+    let currentLang = 'ko';
+
+    function setLang(lang) {
+      currentLang = lang;
+      document.getElementById('lang-ko').classList.toggle('active', lang === 'ko');
+      document.getElementById('lang-en').classList.toggle('active', lang === 'en');
+      const d = langData[lang];
+      document.getElementById('nav-logo').textContent = d.navLogo;
+      document.getElementById('nav-strengths').textContent = d.navStrengths;
+      document.getElementById('nav-about').textContent = d.navAbout;
+      document.getElementById('nav-contact').textContent = d.navContact;
+      document.getElementById('hero-name').textContent = d.heroName;
+      document.getElementById('hero-positioning').innerHTML = d.heroPositioning;
+      document.getElementById('strengths-eyebrow').textContent = d.strengthsEyebrow;
+      for (let i = 1; i <= 3; i++) {
+        document.getElementById('strength-title-' + i).textContent = d.strengthTitles[i-1];
+        document.getElementById('strength-desc-' + i).innerHTML = d.strengthDescs[i-1];
+      }
+      document.getElementById('about-eyebrow').textContent = d.aboutEyebrow;
+      document.getElementById('about-body').innerHTML = d.aboutBody;
+      document.getElementById('contact-eyebrow').textContent = d.contactEyebrow;
+      document.getElementById('contact-headline').innerHTML = d.contactHeadline + '<span id="contact-headline-span">' + d.contactHeadlineSpan + '</span>';
+      document.getElementById('contact-email').textContent = d.contactEmail;
+      document.getElementById('footer-left').textContent = d.footerLeft;
+      document.getElementById('footer-right').textContent = d.footerRight;
+    }
+
+    document.getElementById('lang-ko').addEventListener('click', () => setLang('ko'));
+    document.getElementById('lang-en').addEventListener('click', () => setLang('en'));
+
+    // Set default language
+    setLang('ko');
+    </script>
       gap: 2rem;
       flex-wrap: wrap;
     }
