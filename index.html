@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>최관혁</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black: #0f0f0f;
+      --gray-dark: #3a3a3a;
+      --gray: #888;
+      --gray-light: #e4e4e4;
+      --off-white: #f7f7f5;
+      --white: #ffffff;
+      --font: 'Helvetica Neue', Arial, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font);
+      color: var(--black);
+      background: var(--white);
+      line-height: 1.6;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.25rem 6%;
+      background: rgba(255,255,255,0.9);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--gray-light);
+    }
+
+    .nav-logo {
+      font-size: 0.95rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-decoration: none;
+      color: var(--black);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.8rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--gray);
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--black); }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 0 6% 7rem;
+    }
+
+    .hero-name {
+      font-size: clamp(3.5rem, 10vw, 8rem);
+      font-weight: 700;
+      line-height: 1;
+      letter-spacing: -0.03em;
+      margin-bottom: 2rem;
+    }
+
+    .hero-positioning {
+      font-size: clamp(1rem, 2.2vw, 1.4rem);
+      color: var(--gray-dark);
+      font-weight: 400;
+      max-width: 600px;
+      line-height: 1.7;
+      border-left: 2px solid var(--black);
+      padding-left: 1.25rem;
+    }
+
+    /* ── SECTION BASE ── */
+    section {
+      padding: 7rem 6%;
+    }
+
+    .section-eyebrow {
+      font-size: 0.72rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gray);
+      margin-bottom: 4rem;
+    }
+
+    /* ── STRENGTHS ── */
+    #strengths {
+      background: var(--off-white);
+    }
+
+    .strengths-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--gray-light);
+      border: 1px solid var(--gray-light);
+    }
+
+    .strength-card {
+      background: var(--off-white);
+      padding: 2.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .strength-number {
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      color: var(--gray);
+    }
+
+    .strength-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      line-height: 1.2;
+    }
+
+    .strength-desc {
+      font-size: 0.9rem;
+      color: var(--gray-dark);
+      line-height: 1.75;
+      margin-top: auto;
+    }
+
+    /* ── ABOUT ── */
+    #about {
+      max-width: 100%;
+    }
+
+    .about-body {
+      max-width: 640px;
+    }
+
+    .about-body p {
+      font-size: clamp(1.1rem, 2vw, 1.35rem);
+      color: var(--gray-dark);
+      line-height: 1.8;
+    }
+
+    /* ── CONTACT ── */
+    #contact {
+      background: var(--black);
+      color: var(--white);
+    }
+
+    .contact-inner {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .contact-headline {
+      font-size: clamp(2rem, 5vw, 4rem);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+    }
+
+    .contact-headline span {
+      color: var(--gray);
+    }
+
+    .contact-email {
+      font-size: 1rem;
+      color: var(--gray);
+      text-decoration: none;
+      letter-spacing: 0.03em;
+      border-bottom: 1px solid #333;
+      padding-bottom: 0.2rem;
+      transition: color 0.2s, border-color 0.2s;
+      white-space: nowrap;
+    }
+
+    .contact-email:hover {
+      color: var(--white);
+      border-color: var(--white);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 1.5rem 6%;
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.75rem;
+      color: var(--gray);
+      border-top: 1px solid var(--gray-light);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+
+      .strengths-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .contact-inner {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 2.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#hero" class="nav-logo">Gwanhyeok Choi</a>
+    <ul class="nav-links">
+      <li><a href="#strengths">강점</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <h1 class="hero-name">최관혁</h1>
+    <p class="hero-positioning">
+      AI와 자동화로 일하는 방식을 바꾸고,<br>
+      콘텐츠 감각으로 사람들과 연결되는 기획자.
+    </p>
+  </section>
+
+  <!-- STRENGTHS -->
+  <section id="strengths">
+    <p class="section-eyebrow">강점</p>
+    <div class="strengths-grid">
+
+      <div class="strength-card">
+        <span class="strength-number">01</span>
+        <h2 class="strength-title">AI 활용</h2>
+        <p class="strength-desc">
+          AI와 파이썬으로 업무 자동화 시스템을 직접 구축합니다.
+          도구를 쓰는 것에서 그치지 않고, 내 손으로 만들어 문제를 해결합니다.
+        </p>
+      </div>
+
+      <div class="strength-card">
+        <span class="strength-number">02</span>
+        <h2 class="strength-title">문제 해결</h2>
+        <p class="strength-desc">
+          비효율적인 구조를 그냥 지나치지 않습니다.
+          왜 이렇게 되어 있는지를 먼저 묻고, 더 나은 방식을 찾아 실행합니다.
+        </p>
+      </div>
+
+      <div class="strength-card">
+        <span class="strength-number">03</span>
+        <h2 class="strength-title">콘텐츠 감각</h2>
+        <p class="strength-desc">
+          영상·마케팅 실무 경험을 바탕으로 콘텐츠 트렌드를 읽습니다.
+          무엇이 사람들의 마음을 움직이는지 직관적으로 압니다.
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <p class="section-eyebrow">About</p>
+    <div class="about-body">
+      <p>
+        새로운 도구를 빠르게 익혀 실제 문제에 적용하는 걸 즐깁니다.
+        AI 자동화부터 콘텐츠 기획까지, 기술과 감각 사이 어딘가에서 일합니다.
+        좋은 기획은 화려한 아이디어가 아니라 정확한 문제 정의에서 온다고 믿습니다.
+      </p>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <p class="section-eyebrow" style="color: #555;">Contact</p>
+    <div class="contact-inner">
+      <h2 class="contact-headline">
+        함께 일하고 싶다면<br>
+        <span>편하게 연락하세요.</span>
+      </h2>
+      <a href="mailto:dennett0610@gmail.com" class="contact-email">dennett0610@gmail.com</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <span>© 2026 최관혁</span>
+    <span>Seoul, Korea</span>
+  </footer>
+
+</body>
+</html>
