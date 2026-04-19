@@ -142,7 +142,7 @@
       letter-spacing: -0.04em;
       color: var(--text);
       margin-top: 80px;
-      margin-bottom: 260px;
+      margin-bottom: 220px;
     }
 
     .hero-ko {
@@ -664,7 +664,7 @@
 <section id="contact">
   <div class="container">
     <p class="section-label">CONTACT</p>
-    <h2 class="contact-heading" data-ko="연락할 이유는 이미 충분히 봤습니다" data-en="You already know why you should reach out.">연락할 이유는 이미 충분히 봤습니다</h2>
+    <h2 class="contact-heading" data-ko="연락할 이유는<br>이미 충분히 봤습니다" data-en="You already know why<br>you should reach out.">연락할 이유는<br>이미 충분히 봤습니다</h2>
     <div class="contact-links">
       <div class="contact-item">
         <span class="contact-type">Email</span>
@@ -771,7 +771,9 @@
     btn.textContent = currentLang === 'ko' ? 'EN' : 'KO';
 
     document.querySelectorAll('[data-ko][data-en]').forEach(el => {
-      el.textContent = el.dataset[currentLang];
+      const val = el.dataset[currentLang];
+      if (val.includes('<br>')) el.innerHTML = val;
+      else el.textContent = val;
     });
 
     document.querySelectorAll('[data-lang]').forEach(el => {
