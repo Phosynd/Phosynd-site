@@ -48,7 +48,7 @@
       margin: 0 auto;
       display: flex;
       align-items: center;
-      justify-content: flex-end;
+      justify-content: space-between;
     }
 
     .nav-logo {
@@ -57,8 +57,12 @@
       letter-spacing: 0.02em;
       text-decoration: none;
       color: var(--text);
-      margin-right: auto;
-      display: none;
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 40px;
     }
 
     .nav-links {
@@ -120,21 +124,24 @@
       display: flex;
       align-items: center;
       padding-top: var(--nav-h);
+      padding-left: 20px;
+      padding-right: 20px;
     }
 
     .hero-inner {
       max-width: 1120px;
       margin: 0 auto;
       width: 100%;
+      padding-left: 0;
     }
 
     .hero-name {
-      font-size: clamp(52px, 9vw, 120px);
+      font-size: clamp(72px, 13vw, 180px);
       font-weight: 800;
       line-height: 1;
       letter-spacing: -0.04em;
       color: var(--text);
-      margin-bottom: 120px;
+      margin-bottom: 260px;
     }
 
     .hero-ko {
@@ -502,6 +509,10 @@
         display: none;
       }
 
+      .nav-right {
+        gap: 16px;
+      }
+
       .modal { padding: 36px 28px 32px; }
 
       .modal-result-grid { flex-wrap: wrap; gap: 20px; }
@@ -517,14 +528,16 @@
 <!-- NAV -->
 <nav>
   <div class="nav-inner">
-    <a class="nav-logo" href="#hero">Phosynd</a>
-    <ul class="nav-links">
-      <li><a href="#about">ABOUT</a></li>
-      <li><a href="#think">HOW I THINK</a></li>
-      <li><a href="#work">WORK</a></li>
-      <li><a href="#contact">CONTACT</a></li>
-    </ul>
-    <button class="lang-toggle" id="langBtn" onclick="toggleLang()">EN</button>
+    <a class="nav-logo" href="https://phosynd.com">Phosynd</a>
+    <div class="nav-right">
+      <ul class="nav-links">
+        <li><a href="#about">ABOUT</a></li>
+        <li><a href="#think">HOW I THINK</a></li>
+        <li><a href="#work">WORK</a></li>
+        <li><a href="#contact">CONTACT</a></li>
+      </ul>
+      <button class="lang-toggle" id="langBtn" onclick="toggleLang()">EN</button>
+    </div>
   </div>
 </nav>
 
