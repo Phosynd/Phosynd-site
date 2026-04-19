@@ -126,17 +126,26 @@
       width: 100%;
     }
 
-    .hero-ko {
-      font-size: clamp(36px, 6vw, 72px);
+    .hero-name {
+      font-size: clamp(52px, 9vw, 120px);
       font-weight: 800;
-      line-height: 1.15;
+      line-height: 1;
+      letter-spacing: -0.04em;
+      color: var(--text);
+      margin-bottom: 64px;
+    }
+
+    .hero-ko {
+      font-size: clamp(24px, 4vw, 52px);
+      font-weight: 800;
+      line-height: 1.2;
       letter-spacing: -0.02em;
       color: var(--text);
       margin-bottom: 20px;
     }
 
     .hero-en {
-      font-size: clamp(18px, 2.8vw, 32px);
+      font-size: clamp(15px, 2vw, 24px);
       font-weight: 400;
       color: var(--secondary);
       letter-spacing: -0.01em;
@@ -527,10 +536,10 @@
   <div class="nav-inner">
     <a class="nav-logo" href="#hero">Phosynd</a>
     <ul class="nav-links">
-      <li><a href="#about" data-ko="소개" data-en="About">소개</a></li>
-      <li><a href="#think" data-ko="사고방식" data-en="How I Think">사고방식</a></li>
-      <li><a href="#work" data-ko="경험" data-en="Work">경험</a></li>
-      <li><a href="#contact" data-ko="연락" data-en="Contact">연락</a></li>
+      <li><a href="#about">ABOUT</a></li>
+      <li><a href="#think">HOW I THINK</a></li>
+      <li><a href="#work">WORK</a></li>
+      <li><a href="#contact">CONTACT</a></li>
     </ul>
     <button class="lang-toggle" id="langBtn" onclick="toggleLang()">EN</button>
   </div>
@@ -539,6 +548,7 @@
 <!-- HERO -->
 <section id="hero">
   <div class="hero-inner container">
+    <div class="hero-name" id="heroName" data-ko="최관혁" data-en="Choi Kwanhyeok">최관혁</div>
     <h1 class="hero-ko">날카로운 통찰로 판단하고,<br>사람을 움직인다</h1>
     <p class="hero-en">Sharp insight. Moving people forward.</p>
     <div class="hero-scroll">SCROLL</div>
