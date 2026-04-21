@@ -425,6 +425,72 @@
       margin-top: 4px;
     }
 
+    /* ── INTRO ── */
+    #intro {
+      padding: 0 40px 100px;
+    }
+
+    .intro-card {
+      max-width: 1120px;
+      margin: 0 auto;
+      background: var(--text);
+      color: var(--bg);
+      border-radius: 14px;
+      padding: 52px 56px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 48px;
+    }
+
+    .intro-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      flex-shrink: 0;
+    }
+
+    .intro-tag {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      color: rgba(250,249,246,0.55);
+      line-height: 1.6;
+    }
+
+    .intro-tag span {
+      color: var(--bg);
+    }
+
+    .intro-divider {
+      width: 1px;
+      background: rgba(250,249,246,0.15);
+      align-self: stretch;
+      flex-shrink: 0;
+    }
+
+    .intro-desc {
+      font-size: clamp(15px, 1.5vw, 18px);
+      font-weight: 500;
+      line-height: 1.75;
+      color: rgba(250,249,246,0.85);
+    }
+
+    .intro-desc strong {
+      color: var(--bg);
+      font-weight: 700;
+    }
+
+    @media (max-width: 720px) {
+      #intro { padding: 0 20px 80px; }
+      .intro-card {
+        flex-direction: column;
+        padding: 36px 28px;
+        gap: 28px;
+      }
+      .intro-divider { width: 100%; height: 1px; align-self: auto; }
+    }
+
     /* ── CONTACT ── */
     #contact {
       border-top: 1px solid rgba(17,17,17,0.07);
@@ -548,6 +614,23 @@
     <div class="hero-name" id="heroName" data-ko="최관혁" data-en="Choi Kwanhyeok">최관혁</div>
     <h1 class="hero-ko">날카로운 통찰로 판단하고,<br>사람을 움직인다</h1>
     <p class="hero-en">Sharp insight. Moving people forward.</p>
+  </div>
+</section>
+
+<!-- INTRO CARD -->
+<section id="intro">
+  <div class="intro-card">
+    <div class="intro-meta">
+      <p class="intro-tag">
+        <span data-ko="PM 지망생 · 크리에이터 이코노미" data-en="Aspiring PM · Creator Economy">PM 지망생 · 크리에이터 이코노미</span>
+      </p>
+      <p class="intro-tag" data-ko="24세(2003.12.29) · ENTJ · 해병대 출신" data-en="24 (2003.12.29) · ENTJ · Republic of Korea Marine Corps">24세(2003.12.29) · ENTJ · 해병대 출신</p>
+    </div>
+    <div class="intro-divider"></div>
+    <p class="intro-desc">
+      <div data-lang="ko"><strong>사용자의 불편을 먼저 발견하고,</strong><br>구조적으로 해결하는 것을 목표로 합니다.</div>
+      <div data-lang="en" style="display:none"><strong>I start by finding what's broken,</strong><br>and aim to fix it through product.</div>
+    </p>
   </div>
 </section>
 
