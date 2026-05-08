@@ -1,922 +1,1429 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" class="opening-mode">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Phosynd — 최관혁</title>
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-TSXKTE3F9Z"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-TSXKTE3F9Z');
-  </script>
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --bg: #FAF9F6;
-      --text: #111111;
-      --accent: #0066FF;
-      --secondary: #888888;
-      --card-bg: #F5F5F5;
-      --border: rgba(0, 102, 255, 0.18);
-      --nav-h: 64px;
-    }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: -apple-system, BlinkMacSystemFont, 'Pretendard', 'Noto Sans KR', 'Segoe UI', sans-serif;
-      line-height: 1.6;
-      font-size: 16px;
-    }
-
-    /* ── NAV ── */
-    nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      height: var(--nav-h);
-      background: rgba(250, 249, 246, 0.92);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(17,17,17,0.07);
-      z-index: 100;
-      display: flex;
-      align-items: center;
-      padding: 0 40px;
-    }
-
-    .nav-inner {
-      max-width: 1120px;
-      width: 100%;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .nav-logo {
-      font-size: 16px;
-      font-weight: 700;
-      letter-spacing: 0.02em;
-      text-decoration: none;
-      color: var(--text);
-    }
-
-    .nav-right {
-      display: flex;
-      align-items: center;
-      gap: 40px;
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 32px;
-      list-style: none;
-    }
-
-    .nav-links a {
-      font-size: 13px;
-      font-weight: 500;
-      text-decoration: none;
-      color: var(--secondary);
-      letter-spacing: 0.04em;
-      transition: color 0.2s;
-    }
-    .nav-links a:hover { color: var(--text); }
-
-    .lang-toggle {
-      background: none;
-      border: 1px solid rgba(17,17,17,0.2);
-      border-radius: 4px;
-      padding: 5px 12px;
-      font-size: 12px;
-      font-weight: 600;
-      letter-spacing: 0.06em;
-      cursor: pointer;
-      color: var(--text);
-      transition: all 0.2s;
-    }
-    .lang-toggle:hover {
-      border-color: var(--accent);
-      color: var(--accent);
-    }
-
-    /* ── LAYOUT ── */
-    section {
-      padding: 120px 40px;
-    }
-
-    .container {
-      max-width: 1120px;
-      margin: 0 auto;
-    }
-
-    .section-label {
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.14em;
-      color: var(--secondary);
-      text-transform: uppercase;
-      margin-bottom: 48px;
-    }
-
-    /* ── HERO ── */
-    #hero {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      padding-top: var(--nav-h);
-      padding-left: 20px;
-      padding-right: 20px;
-    }
-
-    .hero-inner {
-      max-width: 1120px;
-      margin: 0 auto;
-      width: 100%;
-      padding-left: 0;
-    }
-
-    .hero-name {
-      font-size: clamp(54px, 10vw, 140px);
-      font-weight: 800;
-      line-height: 1;
-      letter-spacing: -0.04em;
-      color: var(--text);
-      margin-top: 80px;
-      margin-bottom: 220px;
-    }
-
-    .hero-ko {
-      font-size: clamp(24px, 4vw, 52px);
-      font-weight: 800;
-      line-height: 1.2;
-      letter-spacing: -0.02em;
-      color: var(--text);
-      margin-bottom: 20px;
-    }
-
-    .hero-en {
-      font-size: clamp(15px, 2vw, 24px);
-      font-weight: 400;
-      color: var(--secondary);
-      letter-spacing: -0.01em;
-      line-height: 1.3;
-    }
-
-
-    /* ── ABOUT ── */
-    #about {
-      border-top: 1px solid rgba(17,17,17,0.07);
-    }
-
-    .about-text {
-      max-width: 640px;
-      font-size: clamp(15px, 1.6vw, 18px);
-      line-height: 1.85;
-      color: var(--text);
-    }
-
-    .about-text p {
-      margin-bottom: 1.5em;
-    }
-
-    .about-text p:last-child { margin-bottom: 0; }
-
-    .about-text .emphasis {
-      font-weight: 700;
-    }
-
-    /* ── HOW I THINK ── */
-    #think {
-      border-top: 1px solid rgba(17,17,17,0.07);
-    }
-
-    .think-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 2px;
-    }
-
-    .think-card {
-      padding: 40px 36px;
-      border: 1px solid rgba(17,17,17,0.07);
-    }
-
-    .think-card:nth-child(1) { border-top-left-radius: 8px; }
-    .think-card:nth-child(2) { border-top-right-radius: 8px; }
-    .think-card:nth-child(3) { border-bottom-left-radius: 8px; }
-    .think-card:nth-child(4) { border-bottom-right-radius: 8px; }
-
-    .think-num {
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      color: var(--accent);
-      margin-bottom: 20px;
-    }
-
-    .think-title {
-      font-size: clamp(18px, 2vw, 22px);
-      font-weight: 700;
-      letter-spacing: -0.01em;
-      margin-bottom: 10px;
-    }
-
-    .think-desc {
-      font-size: 14px;
-      color: var(--secondary);
-      line-height: 1.65;
-    }
-
-    /* ── WORK ── */
-    #work {
-      border-top: 1px solid rgba(17,17,17,0.07);
-    }
-
-    .work-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-    }
-
-    .work-card {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 36px 32px;
-      cursor: pointer;
-      transition: all 0.22s;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .work-card::after {
-      content: '';
-      position: absolute;
-      top: 0; left: 0;
-      width: 2px; height: 100%;
-      background: var(--accent);
-      opacity: 0;
-      transition: opacity 0.22s;
-    }
-
-    .work-card:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 12px 40px rgba(0, 102, 255, 0.09);
-      border-color: rgba(0, 102, 255, 0.35);
-    }
-
-    .work-card:hover::after { opacity: 1; }
-
-    .work-num {
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      color: var(--secondary);
-      margin-bottom: 16px;
-    }
-
-    .work-title {
-      font-size: 19px;
-      font-weight: 700;
-      letter-spacing: -0.01em;
-      margin-bottom: 8px;
-    }
-
-    .work-subtitle {
-      font-size: 13px;
-      color: var(--secondary);
-      line-height: 1.6;
-      margin-bottom: 28px;
-    }
-
-    .work-metric-main {
-      font-size: clamp(36px, 4vw, 52px);
-      font-weight: 800;
-      color: var(--accent);
-      letter-spacing: -0.03em;
-      line-height: 1;
-      margin-bottom: 6px;
-    }
-
-    .work-metric-sub {
-      font-size: 12px;
-      color: var(--secondary);
-      font-weight: 500;
-      letter-spacing: 0.02em;
-    }
-
-    .work-cta {
-      margin-top: 24px;
-      font-size: 12px;
-      font-weight: 600;
-      color: var(--accent);
-      letter-spacing: 0.04em;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .work-cta svg {
-      transition: transform 0.2s;
-    }
-    .work-card:hover .work-cta svg { transform: translateX(4px); }
-
-    /* ── MODAL ── */
-    .modal-overlay {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(17,17,17,0.55);
-      backdrop-filter: blur(4px);
-      z-index: 200;
-      align-items: center;
-      justify-content: center;
-      padding: 24px;
-    }
-
-    .modal-overlay.open { display: flex; }
-
-    .modal {
-      background: var(--bg);
-      border-radius: 14px;
-      max-width: 640px;
-      width: 100%;
-      max-height: 90vh;
-      overflow-y: auto;
-      padding: 52px 52px 48px;
-      position: relative;
-      animation: modalIn 0.28s cubic-bezier(0.16,1,0.3,1);
-    }
-
-    @keyframes modalIn {
-      from { opacity: 0; transform: translateY(16px) scale(0.98); }
-      to   { opacity: 1; transform: translateY(0) scale(1); }
-    }
-
-    .modal-close {
-      position: absolute;
-      top: 20px; right: 20px;
-      background: none;
-      border: none;
-      cursor: pointer;
-      color: var(--secondary);
-      padding: 8px;
-      line-height: 0;
-      transition: color 0.15s;
-    }
-    .modal-close:hover { color: var(--text); }
-
-    .modal-num {
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      color: var(--accent);
-      margin-bottom: 10px;
-    }
-
-    .modal-title {
-      font-size: 26px;
-      font-weight: 800;
-      letter-spacing: -0.02em;
-      margin-bottom: 36px;
-    }
-
-    .modal-section {
-      margin-bottom: 28px;
-    }
-
-    .modal-section-label {
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      color: var(--accent);
-      text-transform: uppercase;
-      margin-bottom: 10px;
-    }
-
-    .modal-section-body {
-      font-size: 14px;
-      line-height: 1.85;
-      color: var(--text);
-    }
-
-    .modal-section-body p { margin-bottom: 0.5em; }
-    .modal-section-body p:last-child { margin-bottom: 0; }
-
-    .modal-result-grid {
-      display: flex;
-      gap: 32px;
-      margin-top: 4px;
-    }
-
-    .modal-result-item { }
-
-    .modal-result-main {
-      font-size: 36px;
-      font-weight: 800;
-      color: var(--accent);
-      letter-spacing: -0.03em;
-      line-height: 1;
-    }
-
-    .modal-result-label {
-      font-size: 12px;
-      color: var(--secondary);
-      margin-top: 4px;
-    }
-
-    /* ── INTRO ── */
-    #intro {
-      padding: 0 40px 100px;
-    }
-
-    .intro-card {
-      max-width: 1120px;
-      margin: 0 auto;
-      background: #ECEAE4;
-      color: var(--text);
-      border-radius: 14px;
-      padding: 52px 56px;
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      gap: 48px;
-    }
-
-    .intro-meta {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-      flex-shrink: 0;
-    }
-
-    .intro-tag {
-      font-size: 13px;
-      font-weight: 700;
-      letter-spacing: 0.04em;
-      color: var(--secondary);
-      line-height: 1.6;
-    }
-
-    .intro-tag span {
-      color: var(--text);
-    }
-
-    .intro-divider {
-      width: 1px;
-      background: rgba(17,17,17,0.12);
-      align-self: stretch;
-      flex-shrink: 0;
-    }
-
-    .intro-desc {
-      font-size: clamp(15px, 1.5vw, 18px);
-      font-weight: 500;
-      line-height: 1.75;
-      color: var(--text);
-    }
-
-    .intro-desc strong {
-      color: var(--text);
-      font-weight: 700;
-    }
-
-    @media (max-width: 720px) {
-      #intro { padding: 0 20px 80px; }
-      .intro-card {
-        flex-direction: column;
-        padding: 36px 28px;
-        gap: 28px;
-      }
-      .intro-divider { width: 100%; height: 1px; align-self: auto; }
-    }
-
-    /* ── CONTACT ── */
-    #contact {
-      border-top: 1px solid rgba(17,17,17,0.07);
-      min-height: 50vh;
-      display: flex;
-      align-items: center;
-    }
-
-    #contact .container {
-      width: 100%;
-    }
-
-    .contact-heading {
-      font-size: clamp(28px, 4vw, 52px);
-      font-weight: 800;
-      letter-spacing: -0.025em;
-      line-height: 1.2;
-      margin-bottom: 48px;
-      max-width: 720px;
-    }
-
-    .contact-links {
-      display: flex;
-      gap: 40px;
-      flex-wrap: wrap;
-    }
-
-    .contact-item {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-
-    .contact-type {
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      color: var(--secondary);
-      text-transform: uppercase;
-    }
-
-    .contact-value {
-      font-size: 16px;
-      font-weight: 600;
-      color: var(--text);
-      text-decoration: none;
-      border-bottom: 1px solid transparent;
-      transition: border-color 0.2s, color 0.2s;
-    }
-    .contact-value:hover {
-      color: var(--accent);
-      border-color: var(--accent);
-    }
-
-    /* ── FOOTER ── */
-    footer {
-      padding: 32px 40px;
-      border-top: 1px solid rgba(17,17,17,0.07);
-      text-align: center;
-      font-size: 12px;
-      color: var(--secondary);
-    }
-
-    /* ── RESPONSIVE ── */
-    @media (max-width: 900px) {
-      .think-grid {
-        grid-template-columns: 1fr;
-        gap: 0;
-      }
-      .think-card:nth-child(1) { border-radius: 8px 8px 0 0; }
-      .think-card:nth-child(2) { border-radius: 0; }
-      .think-card:nth-child(3) { border-radius: 0; }
-      .think-card:nth-child(4) { border-radius: 0 0 8px 8px; }
-
-      .work-grid { grid-template-columns: 1fr; }
-    }
-
-    @media (max-width: 680px) {
-      nav { padding: 0 20px; }
-      section { padding: 80px 20px; }
-
-      .nav-links {
-        display: none;
-      }
-
-      .nav-right {
-        gap: 16px;
-      }
-
-      .modal { padding: 36px 28px 32px; }
-
-      .modal-result-grid { flex-wrap: wrap; gap: 20px; }
-
-      .contact-links { gap: 28px; }
-
-      footer { padding: 24px 20px; }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Phosynd — 최관혁</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ── OPENING MODE ── */
+html.opening-mode,
+html.opening-mode body{overflow:hidden;cursor:none;background:#090909}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+/* ══════════════════════════════
+   OPENING STYLES
+══════════════════════════════ */
+#opening-wrap{position:fixed;inset:0;z-index:1000;background:#090909}
+canvas{position:fixed;top:0;left:0;display:block}
+
+#mc{position:fixed;top:0;left:0;z-index:9999;pointer-events:none;opacity:0;transition:opacity .15s;will-change:transform}
+
+#p2{position:fixed;inset:0;z-index:5;opacity:0;transition:opacity .6s;display:flex;align-items:center;justify-content:center;overflow:hidden}
+#wf-scene{position:relative;width:5200px;height:3000px;transform-origin:center;transform:scale(1);transition:transform 1.8s cubic-bezier(.4,0,.2,1);flex-shrink:0}
+#wf-svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none}
+.wn{position:absolute;width:270px;height:128px;background:rgba(12,12,22,.96);border:1px solid rgba(99,102,241,.22);border-radius:10px;padding:16px 18px;opacity:0;transform:scale(.88) translateY(10px);transition:opacity .4s ease,transform .4s cubic-bezier(.34,1.56,.64,1),border-color .3s}
+.wn.on{opacity:1;transform:scale(1) translateY(0);border-color:rgba(99,102,241,.65)}
+.wn-tag{font:500 .52rem/1 'DM Mono',monospace;letter-spacing:.14em;text-transform:uppercase;color:#6366f1;margin-bottom:7px}
+.wn-title{font:500 1rem/1.2 'Noto Sans KR',sans-serif;color:rgba(255,255,255,.92);margin-bottom:5px}
+.wn-code{font:.6rem/1 'DM Mono',monospace;color:rgba(255,255,255,.25)}
+.wn-badge{position:absolute;top:-9px;right:14px;background:#4f46e5;color:#fff;font:.52rem/1 'DM Mono',monospace;padding:2px 9px;border-radius:20px}
+.wg{position:absolute;width:188px;height:90px;background:rgba(12,12,22,.7);border:1px solid rgba(99,102,241,.1);border-radius:8px;padding:12px 14px;opacity:0;transition:opacity .7s ease}
+.wg.on{opacity:1}
+.wg-tag{font:.48rem/1 'DM Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:rgba(99,102,241,.45);margin-bottom:5px}
+.wg-title{font:.8rem/1.2 'Noto Sans KR',sans-serif;color:rgba(255,255,255,.42)}
+.wfl{fill:none;stroke:rgba(99,102,241,.5);stroke-width:1.5}
+.wfl-core{stroke-dasharray:400;stroke-dashoffset:400;transition:stroke-dashoffset .5s cubic-bezier(.4,0,.2,1)}
+.wfl-core.drawn{stroke-dashoffset:0}
+.wfl-ghost{stroke:rgba(99,102,241,.14);stroke-width:1;opacity:0;transition:opacity .7s}
+.wfl-ghost.on{opacity:1}
+.wdot{fill:#6366f1;opacity:0;transition:opacity .25s}
+.wdot.on{opacity:1}
+#wf-stat{position:absolute;bottom:-48px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:10px;opacity:0;transition:opacity .5s;white-space:nowrap}
+#wf-stat.on{opacity:1}
+.wf-sdot{width:6px;height:6px;border-radius:50%;background:#22c55e;box-shadow:0 0 8px #22c55e;animation:bp 1.4s infinite}
+@keyframes bp{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(1.4)}}
+#wf-stat span{font:.68rem/1 'DM Mono',monospace;color:rgba(255,255,255,.32);letter-spacing:.06em}
+#wf-stat strong{color:#22c55e}
+
+#p3{position:fixed;inset:0;z-index:6;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px;opacity:0;transition:opacity .5s}
+#term{width:660px;max-width:92vw;background:#111;border:1px solid rgba(255,255,255,.1);border-radius:10px;overflow:hidden;box-shadow:0 40px 100px rgba(0,0,0,.7);transform:translateX(130vw);transition:none}
+.tb{display:flex;align-items:center;gap:7px;padding:11px 15px;background:#1c1c1c;border-bottom:1px solid rgba(255,255,255,.06);position:relative}
+.td{width:12px;height:12px;border-radius:50%}
+.td:nth-child(1){background:#ff5f57}.td:nth-child(2){background:#ffbd2e}.td:nth-child(3){background:#28c840}
+.tt{font:.65rem/1 'DM Mono',monospace;color:rgba(255,255,255,.22);letter-spacing:.06em;position:absolute;left:50%;transform:translateX(-50%)}
+#tbody{padding:18px 20px;height:320px;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end}
+.tl{font:.73rem/1.85 'DM Mono',monospace;color:rgba(255,255,255,.52);display:block;white-space:pre;flex-shrink:0}
+.tl .ok{color:#22c55e}.tl .acc{color:#818cf8}.tl .err{color:#f87171}.tl .dim{color:rgba(255,255,255,.2)}
+.tcur{display:inline-block;width:7px;height:.8em;background:rgba(255,255,255,.75);vertical-align:middle;margin-left:1px;animation:tblink 1s step-end infinite}
+@keyframes tblink{0%,100%{opacity:1}50%{opacity:0}}
+#t-hint{font:.8rem/1 'Noto Sans KR',sans-serif;color:rgba(255,255,255,.28);letter-spacing:.03em;opacity:0;transition:opacity .5s}
+#t-hint kbd{display:inline-block;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.16);border-radius:4px;padding:1px 9px;font:.7rem/1 'DM Mono',monospace;color:rgba(255,255,255,.45);margin-left:8px}
+#enterbtn{background:transparent;border:1px solid rgba(99,102,241,.5);color:rgba(255,255,255,.8);font:.85rem/1 'Noto Sans KR',sans-serif;font-weight:500;padding:13px 44px;border-radius:3px;cursor:pointer;letter-spacing:.08em;opacity:0;transition:all .25s;animation:gp 2.5s ease-in-out infinite;animation-play-state:paused}
+#enterbtn.show{opacity:1;animation-play-state:running}
+#enterbtn:hover{background:rgba(99,102,241,.2);border-color:#818cf8;color:#fff;animation-play-state:paused}
+@keyframes gp{0%,100%{box-shadow:0 0 0 0 rgba(99,102,241,0)}50%{box-shadow:0 0 20px 4px rgba(99,102,241,.2)}}
+
+/* ══════════════════════════════
+   MAIN CONTENT STYLES
+══════════════════════════════ */
+#main-wrap{display:none;opacity:0;transition:opacity .8s}
+#main-wrap.visible{opacity:1}
+
+:root{
+  --bg:#F5F4F1;
+  --bg-white:#FFFFFF;
+  --bg-dark:#0D0D0D;
+  --text:#111111;
+  --text-mid:#555555;
+  --text-light:#999999;
+  --accent:#3730A3;
+  --border:rgba(0,0,0,0.1);
+  --ease-out:cubic-bezier(.22,1,.36,1);
+}
+html:not(.opening-mode){scroll-behavior:smooth;font-size:16px}
+#main-wrap{font-size:16px;background:var(--bg);color:var(--text);font-family:'Pretendard Variable','Pretendard',sans-serif;font-weight:400;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+#main-wrap a{color:inherit;text-decoration:none}
+#main-wrap img{display:block;max-width:100%}
+
+.f-heading{font-family:'Pretendard Variable','Pretendard',sans-serif}
+.f-mono{font-family:'DM Mono',monospace}
+.f-sans{font-family:'Pretendard Variable','Pretendard',sans-serif}
+
+.reveal{opacity:0;transform:translateY(32px);transition:opacity .8s var(--ease-out),transform .8s var(--ease-out)}
+.reveal.visible{opacity:1;transform:none}
+.d1{transition-delay:.1s}
+.d2{transition-delay:.2s}
+.d3{transition-delay:.3s}
+.d4{transition-delay:.4s}
+.d5{transition-delay:.5s}
+
+.arrow-link{display:inline-flex;align-items:center;gap:6px;font-family:'DM Mono',monospace;font-size:.8rem;letter-spacing:.06em;color:var(--accent);transition:gap .25s var(--ease-out)}
+.arrow-link:hover{gap:12px}
+.arrow-link span{transition:transform .25s var(--ease-out)}
+.arrow-link:hover span{transform:translateX(4px)}
+
+#nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 60px;height:68px;
+  transition:background .3s,backdrop-filter .3s,border-color .3s;
+  border-bottom:1px solid transparent;
+}
+#nav.scrolled{
+  background:rgba(245,244,241,.88);
+  backdrop-filter:blur(16px);
+  -webkit-backdrop-filter:blur(16px);
+  border-color:var(--border);
+}
+.nav-logo{
+  font-family:'Pretendard Variable','Pretendard',sans-serif;
+  font-size:1.15rem;font-weight:700;letter-spacing:.06em;
+  color:var(--text);text-transform:uppercase;
+}
+.nav-links{display:flex;align-items:center;gap:36px}
+.nav-links a{
+  font-family:'DM Mono',monospace;font-size:.75rem;
+  letter-spacing:.1em;text-transform:uppercase;color:var(--text-mid);
+  transition:color .2s;
+}
+.nav-links a:hover{color:var(--accent)}
+
+#hero{
+  position:relative;min-height:100vh;
+  display:grid;grid-template-columns:1fr 1fr;align-items:center;
+  padding:100px 60px 80px;gap:60px;overflow:hidden;
+}
+#hero::before{
+  content:'';position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(0,0,0,.04) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(0,0,0,.04) 1px,transparent 1px);
+  background-size:48px 48px;
+  pointer-events:none;
+}
+#hero::after{
+  content:'';position:absolute;top:-10%;right:-5%;
+  width:500px;height:500px;border-radius:50%;
+  background:radial-gradient(circle,rgba(55,48,163,.09) 0%,transparent 70%);
+  pointer-events:none;
+}
+
+.hero-text{position:relative;z-index:1}
+.hero-label{
+  font-family:'DM Mono',monospace;font-size:.72rem;
+  letter-spacing:.18em;text-transform:uppercase;color:var(--text-light);
+  margin-bottom:24px;
+}
+.hero-name-ko{
+  font-family:'Pretendard Variable','Pretendard',sans-serif;
+  font-size:clamp(4.8rem,9vw,8.5rem);
+  font-weight:200;line-height:.9;letter-spacing:-.02em;
+  color:var(--text);display:block;
+}
+.hero-name-en{
+  font-family:'Pretendard Variable','Pretendard',sans-serif;
+  font-size:clamp(1.1rem,2vw,1.5rem);
+  font-weight:300;font-style:normal;
+  color:var(--text-light);margin-top:10px;display:block;letter-spacing:.08em;
+}
+.hero-divider{
+  width:48px;height:1px;background:var(--accent);
+  margin:28px 0;
+}
+.hero-declaration{
+  font-family:'Pretendard Variable','Pretendard',sans-serif;
+  font-size:clamp(1.5rem,2.8vw,2.2rem);
+  font-weight:400;line-height:1.4;
+  color:var(--text);
+}
+.hero-declaration em{
+  font-style:normal;color:var(--accent);font-weight:600;
+}
+.hero-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:28px}
+.hero-tag{
+  font-family:'DM Mono',monospace;font-size:.68rem;
+  letter-spacing:.08em;color:var(--text-mid);
+  border:1px solid var(--border);border-radius:2px;
+  padding:5px 12px;
+}
+
+.hero-visual{
+  position:relative;z-index:1;
+  display:flex;align-items:flex-end;justify-content:center;
+}
+.hero-photo-wrap{
+  position:relative;width:100%;max-width:420px;
+}
+.hero-photo{
+  width:100%;aspect-ratio:4/5;object-fit:cover;
+  display:block;
+}
+.hero-photo-placeholder{
+  width:100%;aspect-ratio:4/5;
+  background:rgba(55,48,163,.06);
+  border:1px dashed rgba(55,48,163,.25);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:10px;
+}
+.hero-photo-placeholder span:first-child{
+  font-family:'DM Mono',monospace;font-size:.72rem;
+  color:rgba(55,48,163,.4);letter-spacing:.1em;
+}
+.hero-photo-placeholder span:last-child{
+  font-family:'Pretendard Variable','Pretendard',sans-serif;font-size:.75rem;
+  color:var(--text-light);
+}
+.hero-deco-sq{
+  position:absolute;bottom:-16px;right:-16px;
+  width:80px;height:80px;background:var(--accent);
+  z-index:-1;
+}
+.hero-card{
+  position:absolute;
+  background:var(--bg-white);
+  border:1px solid var(--border);
+  padding:14px 20px;
+  box-shadow:0 8px 40px rgba(0,0,0,.08);
+  min-width:140px;
+}
+.hero-card-num{
+  font-family:'DM Mono',monospace;font-size:1.5rem;font-weight:500;
+  color:var(--accent);line-height:1;
+}
+.hero-card-label{
+  font-family:'Pretendard Variable','Pretendard',sans-serif;font-size:.7rem;
+  color:var(--text-mid);margin-top:5px;
+}
+.hero-card-1{top:-20px;left:-40px}
+.hero-card-2{bottom:60px;right:-30px}
+
+.hero-scroll{
+  position:absolute;bottom:36px;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:10px;
+  opacity:.5;
+}
+.hero-scroll-line{
+  width:1px;height:40px;background:var(--text);
+  animation:scrollline 1.8s ease-in-out infinite;
+}
+@keyframes scrollline{0%,100%{opacity:.3;transform:scaleY(.6)}50%{opacity:1;transform:scaleY(1)}}
+.hero-scroll-text{
+  font-family:'DM Mono',monospace;font-size:.6rem;
+  letter-spacing:.18em;text-transform:uppercase;color:var(--text-mid);
+}
+
+#marquee{
+  background:var(--bg-dark);padding:22px 0;
+  overflow:hidden;user-select:none;
+}
+.marquee-row{display:flex;overflow:hidden;white-space:nowrap;margin:6px 0}
+.marquee-track{
+  display:inline-flex;gap:0;
+  animation:marquee-left 28s linear infinite;
+  will-change:transform;
+}
+.marquee-track.reverse{animation:marquee-right 32s linear infinite}
+.marquee-item{
+  font-family:'DM Mono',monospace;font-size:.78rem;
+  letter-spacing:.06em;color:rgba(255,255,255,.2);
+  padding:0 24px;
+  white-space:nowrap;
+}
+.marquee-item.bright{color:rgba(255,255,255,.75)}
+@keyframes marquee-left{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+@keyframes marquee-right{0%{transform:translateX(-50%)}100%{transform:translateX(0)}}
+
+#about{
+  padding:120px 60px;
+  display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;
+  background:var(--bg);
+}
+.about-section-label{
+  font-family:'DM Mono',monospace;font-size:.68rem;
+  letter-spacing:.18em;text-transform:uppercase;color:var(--text-light);
+  margin-bottom:32px;
+}
+.about-headline{
+  font-family:'Pretendard Variable','Pretendard',sans-serif;
+  font-size:clamp(2rem,3.5vw,3rem);
+  font-weight:300;line-height:1.2;
+  color:var(--text);margin-bottom:36px;
+}
+.about-headline em{
+  font-style:normal;font-weight:200;color:var(--text-light);
+}
+.about-right{display:flex;flex-direction:column;gap:0}
+.principle-card{
+  padding:24px 28px;
+  border-top:1px solid var(--border);
+  transition:border-color .25s,transform .25s var(--ease-out),background .25s;
+  cursor:default;
+}
+.principle-card:last-child{border-bottom:1px solid var(--border)}
+.principle-card:hover{
+  border-color:var(--accent);
+  transform:translateX(4px);
+  background:rgba(55,48,163,.03);
+}
+.principle-num{
+  font-family:'DM Mono',monospace;font-size:.68rem;
+  color:var(--accent);letter-spacing:.1em;margin-bottom:10px;
+}
+.principle-title{
+  font-family:'Pretendard Variable','Pretendard',sans-serif;
+  font-size:1.3rem;font-weight:600;
+  color:var(--text);margin-bottom:8px;line-height:1.3;
+}
+.principle-desc{
+  font-size:.8rem;font-weight:300;
+  color:var(--text-mid);line-height:1.7;
+}
+
+#work{
+  padding:100px 60px 120px;
+  background:var(--bg-white);
+}
+.work-header{
+  display:flex;align-items:baseline;justify-content:space-between;
+  margin-bottom:60px;
+}
+.work-title{
+  font-family:'Pretendard Variable','Pretendard',sans-serif;
+  font-size:clamp(2rem,3.5vw,3rem);
+  font-weight:300;color:var(--text);
+}
+.work-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:2px}
+.work-card{
+  background:var(--bg);padding:40px 36px;
+  position:relative;overflow:hidden;
+  transition:background .3s;
+  display:flex;flex-direction:column;gap:0;
+}
+.work-card:hover{background:#ECEAE6}
+.work-card-top{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:28px}
+.work-card-num{
+  font-family:'DM Mono',monospace;font-size:.68rem;
+  letter-spacing:.12em;color:var(--text-light);
+}
+.work-card-cat{
+  font-family:'DM Mono',monospace;font-size:.65rem;
+  letter-spacing:.1em;color:var(--text-light);
+}
+.work-card-metric{
+  font-family:'DM Mono',monospace;
+  font-size:clamp(2.4rem,4vw,3.2rem);font-weight:500;
+  color:var(--accent);line-height:1;margin-bottom:16px;
+}
+.work-card-tagline{
+  font-family:'Pretendard Variable','Pretendard',sans-serif;
+  font-size:1.1rem;font-weight:600;
+  color:var(--text);line-height:1.4;margin-bottom:12px;
+}
+.work-card-desc{
+  font-size:.8rem;font-weight:300;
+  color:var(--text-mid);line-height:1.75;
+  flex:1;
+}
+.work-card-arrow{
+  width:40px;height:40px;border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  margin-top:32px;align-self:flex-end;
+  transition:background .25s,border-color .25s;
+}
+.work-card:hover .work-card-arrow{
+  background:var(--accent);border-color:var(--accent);
+}
+.work-card-arrow svg{transition:stroke .25s}
+.work-card:hover .work-card-arrow svg{stroke:#fff}
+
+#contact{
+  background:var(--bg-dark);
+  padding:120px 60px 60px;
+  position:relative;overflow:hidden;
+}
+#contact::before{
+  content:'';position:absolute;bottom:-20%;left:50%;
+  transform:translateX(-50%);
+  width:700px;height:400px;border-radius:50%;
+  background:radial-gradient(circle,rgba(55,48,163,.18) 0%,transparent 70%);
+  pointer-events:none;
+}
+.contact-label{
+  font-family:'DM Mono',monospace;font-size:.68rem;
+  letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.25);
+  margin-bottom:48px;
+  position:relative;z-index:1;
+}
+.contact-headline{
+  font-family:'Pretendard Variable','Pretendard',sans-serif;
+  font-size:clamp(2.6rem,5.5vw,5.5rem);font-weight:200;
+  line-height:1.15;color:#fff;margin-bottom:64px;
+  position:relative;z-index:1;
+}
+.contact-headline em{
+  font-style:normal;font-weight:200;color:rgba(255,255,255,.32);
+}
+.contact-email{
+  display:inline-block;
+  font-family:'DM Mono',monospace;
+  font-size:clamp(.9rem,1.5vw,1.1rem);
+  letter-spacing:.04em;color:rgba(255,255,255,.55);
+  border:1px solid rgba(255,255,255,.12);
+  padding:16px 32px;
+  transition:color .25s,border-color .25s;
+  position:relative;z-index:1;
+}
+.contact-email:hover{color:#fff;border-color:rgba(255,255,255,.4)}
+.contact-footer-bar{
+  margin-top:80px;padding-top:24px;
+  border-top:1px solid rgba(255,255,255,.08);
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;z-index:1;
+}
+.contact-copy{
+  font-family:'DM Mono',monospace;font-size:.65rem;
+  letter-spacing:.08em;color:rgba(255,255,255,.2);
+}
+.contact-location{
+  font-family:'DM Mono',monospace;font-size:.65rem;
+  letter-spacing:.1em;color:rgba(255,255,255,.2);
+}
+
+@media(max-width:900px){
+  #nav{padding:0 24px}
+  .nav-links{gap:20px}
+  .nav-links a{font-size:.68rem}
+  #hero{
+    grid-template-columns:1fr;
+    padding:90px 24px 80px;
+    gap:48px;min-height:auto;
+  }
+  .hero-visual{justify-content:center}
+  .hero-photo-wrap{max-width:320px}
+  .hero-card-1{left:-10px;top:-16px}
+  .hero-card-2{right:-10px;bottom:40px}
+  .hero-deco-sq{width:56px;height:56px;bottom:-10px;right:-10px}
+  .hero-scroll{display:none}
+  #about{grid-template-columns:1fr;padding:80px 24px;gap:52px}
+  #work{padding:80px 24px 100px}
+  .work-cards{grid-template-columns:1fr}
+  #contact{padding:80px 24px 48px}
+  .contact-footer-bar{flex-direction:column;gap:10px;align-items:flex-start}
+}
+</style>
 </head>
 <body>
 
-<!-- NAV -->
-<nav>
-  <div class="nav-inner">
-    <a class="nav-logo" href="https://phosynd.com">Phosynd</a>
-    <div class="nav-right">
-      <ul class="nav-links">
-        <li><a href="#about">ABOUT</a></li>
-        <li><a href="#think">HOW I THINK</a></li>
-        <li><a href="#work">WORK</a></li>
-        <li><a href="#contact">CONTACT</a></li>
-      </ul>
-      <button class="lang-toggle" id="langBtn" onclick="toggleLang()">EN</button>
+<!-- ══ OPENING WRAP ══ -->
+<div id="opening-wrap">
+  <!-- Mac cursor -->
+  <div id="mc">
+    <svg width="22" height="27" viewBox="0 0 22 27" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M3.5 1.5 L3.5 23 L8 18 L11.8 26 L14.5 24.8 L10.7 16.8 L18 16.8 Z" fill="#1a1a1a" stroke="#1a1a1a" stroke-width="2.5" stroke-linejoin="round"/>
+      <path d="M3.5 1.5 L3.5 23 L8 18 L11.8 26 L14.5 24.8 L10.7 16.8 L18 16.8 Z" fill="white" stroke="white" stroke-width=".5" stroke-linejoin="round"/>
+    </svg>
+  </div>
+
+  <!-- Chaos canvas -->
+  <canvas id="cc" style="z-index:10"></canvas>
+  <!-- Selection canvas -->
+  <canvas id="sc" style="z-index:11;pointer-events:none"></canvas>
+
+  <!-- Phase 2 Workflow -->
+  <div id="p2">
+    <div id="wf-scene">
+      <svg id="wf-svg"></svg>
+    </div>
+    <div id="wf-stat">
+      <div class="wf-sdot"></div>
+      <span>workflow active — <strong>6 nodes connected</strong> — <strong>0.003s</strong> execution</span>
     </div>
   </div>
-</nav>
 
-<!-- HERO -->
-<section id="hero">
-  <div class="hero-inner container">
-    <div class="hero-name" id="heroName" data-ko="최관혁" data-en="Choi Kwanhyeok">최관혁</div>
-    <h1 class="hero-ko">날카로운 통찰로 판단하고,<br>사람을 움직인다</h1>
-    <p class="hero-en">Sharp insight. Moving people forward.</p>
-  </div>
-</section>
-
-<!-- INTRO CARD -->
-<section id="intro">
-  <div class="intro-card">
-    <div class="intro-meta">
-      <p class="intro-tag">
-        <span data-ko="PM 지망생 · 크리에이터 이코노미" data-en="Aspiring PM · Creator Economy">PM 지망생 · 크리에이터 이코노미</span>
-      </p>
-      <p class="intro-tag" data-ko="24세(2003.12.29) · ENTJ · 해병대 출신" data-en="24 (2003.12.29) · ENTJ · Republic of Korea Marine Corps">24세(2003.12.29) · ENTJ · 해병대 출신</p>
+  <!-- Phase 3 Terminal -->
+  <div id="p3">
+    <div id="term">
+      <div class="tb">
+        <div class="td"></div><div class="td"></div><div class="td"></div>
+        <div class="tt">phosynd — bash — 80×24</div>
+      </div>
+      <div id="tbody"></div>
     </div>
-    <div class="intro-divider"></div>
-    <p class="intro-desc">
-      <div data-lang="ko"><strong>사용자의 불편을 먼저 발견하고,</strong><br>구조적으로 해결하는 것을 목표로 합니다.</div>
-      <div data-lang="en" style="display:none"><strong>I start by finding what's broken,</strong><br>and aim to fix it through product.</div>
-    </p>
-  </div>
-</section>
-
-<!-- ABOUT -->
-<section id="about">
-  <div class="container">
-    <p class="section-label">ABOUT</p>
-    <div class="about-text">
-      <div data-lang="ko">
-        <p>저는 사람의 마음을 바꾸고 싶어서 영상이라는 매체를 선택했습니다.</p>
-        <p>직접 만들고 싶어서 편집을 시작했고,<br>어느새 전문적인 수준이 됐습니다.</p>
-        <p>하지만 항상 더 끌리는 건 제작이 아니라 기획 쪽이었습니다.<br>마케터로 일하면서 그 성향은 더 선명해졌습니다.</p>
-        <p>비효율적인 구조를 발견하면 그냥 넘기지 못했고,<br>AI와 파이썬을 독학해 자동화 시스템을 직접 만들었습니다.<br>300시간짜리 반복 작업이 사라지던 순간,<br>제가 진짜 하고 싶은 일이 무엇인지 알았습니다.</p>
-        <p><span class="emphasis">문제를 정의하고, 구조를 설계하고, 사람을 움직이게 만드는 것.</span></p>
-      </div>
-      <div data-lang="en" style="display:none">
-        <p>I chose video as my medium because I wanted to change people's minds.</p>
-        <p>I started editing because I wanted to make things myself,<br>and eventually reached a professional level.</p>
-        <p>But what always pulled me more was not production — it was planning.<br>That tendency became even clearer when I worked as a marketer.</p>
-        <p>Whenever I found an inefficient structure, I couldn't just let it go.<br>I taught myself AI and Python, and built an automation system from scratch.<br>The moment 300 hours of repetitive work disappeared,<br>I knew what I really wanted to do.</p>
-        <p><span class="emphasis">Define the problem. Design the structure. Move people to act.</span></p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- HOW I THINK -->
-<section id="think">
-  <div class="container">
-    <p class="section-label">HOW I THINK</p>
-    <div class="think-grid">
-
-      <div class="think-card">
-        <div class="think-num">01</div>
-        <h3 class="think-title" data-ko="문제를 먼저 정의한다" data-en="Define First">문제를 먼저 정의한다</h3>
-        <p class="think-desc" data-ko="잘못된 문제를 열심히 푸는 것만큼 비효율적인 건 없다" data-en="Nothing is more wasteful than solving the wrong problem">잘못된 문제를 열심히 푸는 것만큼 비효율적인 건 없다</p>
-      </div>
-
-      <div class="think-card">
-        <div class="think-num">02</div>
-        <h3 class="think-title" data-ko="근거로 움직인다" data-en="Evidence Over Instinct">근거로 움직인다</h3>
-        <p class="think-desc" data-ko="느낌은 틀릴 수 있지만 데이터는 방향을 잡아준다" data-en="Gut feelings can mislead — data points the way">느낌은 틀릴 수 있지만 데이터는 방향을 잡아준다</p>
-      </div>
-
-      <div class="think-card">
-        <div class="think-num">03</div>
-        <h3 class="think-title" data-ko="직접 만든다" data-en="Build It Yourself">직접 만든다</h3>
-        <p class="think-desc" data-ko="이해와 실행 사이의 거리를 없애는 가장 빠른 방법이다" data-en="The fastest way to eliminate the gap between understanding and doing">이해와 실행 사이의 거리를 없애는 가장 빠른 방법이다</p>
-      </div>
-
-      <div class="think-card">
-        <div class="think-num">04</div>
-        <h3 class="think-title" data-ko="방향을 택한다" data-en="Direction Over Speed">방향을 택한다</h3>
-        <p class="think-desc" data-ko="빠르게 가는 것보다 맞는 곳으로 가는 게 먼저다" data-en="Getting somewhere right matters more than getting somewhere fast">빠르게 가는 것보다 맞는 곳으로 가는 게 먼저다</p>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- WORK -->
-<section id="work">
-  <div class="container">
-    <p class="section-label">WORK</p>
-    <div class="work-grid">
-
-      <div class="work-card" onclick="openModal('w1')">
-        <div class="work-num">01</div>
-        <h3 class="work-title" data-ko="GMV 자동화" data-en="GMV Automation">GMV 자동화</h3>
-        <p class="work-subtitle" data-ko="반복 업무를 자동화해 팀의 시간을 되돌려줬다" data-en="Automated repetitive work and gave the team their time back">반복 업무를 자동화해 팀의 시간을 되돌려줬다</p>
-        <div class="work-metric-main">99.9%</div>
-        <div class="work-metric-sub" data-ko="작업시간 절감" data-en="Reduction in work hours">작업시간 절감</div>
-        <div class="work-cta">
-          <span data-ko="자세히 보기" data-en="View details">자세히 보기</span>
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-            <path d="M2 7h10M7 2l5 5-5 5" stroke="#0066FF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </div>
-      </div>
-
-      <div class="work-card" onclick="openModal('w2')">
-        <div class="work-num">02</div>
-        <h3 class="work-title" data-ko="매출 전략 전환" data-en="Revenue Strategy Pivot">매출 전략 전환</h3>
-        <p class="work-subtitle" data-ko="원인을 분석하고 전략을 바꿔 매출을 뒤집었다" data-en="Diagnosed the drop, shifted strategy, reversed the numbers">원인을 분석하고 전략을 바꿔 매출을 뒤집었다</p>
-        <div class="work-metric-main">+74.48%</div>
-        <div class="work-metric-sub" data-ko="수익 $616K→$1.07M" data-en="Revenue $616K→$1.07M">수익 $616K→$1.07M</div>
-        <div class="work-cta">
-          <span data-ko="자세히 보기" data-en="View details">자세히 보기</span>
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-            <path d="M2 7h10M7 2l5 5-5 5" stroke="#0066FF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </div>
-      </div>
-
-      <div class="work-card" onclick="openModal('w3')">
-        <div class="work-num">03</div>
-        <h3 class="work-title" data-ko="메타 전환광고" data-en="Meta Performance Ad">메타 전환광고</h3>
-        <p class="work-subtitle" data-ko="데이터 기반으로 제작한 영상이 상위권을 기록했다" data-en="Data-driven video ranked top among 200 ads">데이터 기반으로 제작한 영상이 상위권을 기록했다</p>
-        <div class="work-metric-main" style="font-size: clamp(28px, 3.2vw, 44px);" data-ko="신입 1위" data-en="#1 Newcomer">신입 1위</div>
-        <div class="work-metric-sub" data-ko="메타 전환광고 200개 중 7위" data-en="Top 7 out of 200 Meta ads">메타 전환광고 200개 중 7위</div>
-        <div class="work-cta">
-          <span data-ko="자세히 보기" data-en="View details">자세히 보기</span>
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-            <path d="M2 7h10M7 2l5 5-5 5" stroke="#0066FF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- CONTACT -->
-<section id="contact">
-  <div class="container">
-    <p class="section-label">CONTACT</p>
-    <h2 class="contact-heading" data-ko="여기까지 읽었다면,<br>다음은 대화입니다" data-en="If you've read this far,<br>let's talk.">여기까지 읽었다면,<br>다음은 대화입니다</h2>
-    <div class="contact-links">
-      <div class="contact-item">
-        <span class="contact-type">Email</span>
-        <a class="contact-value" href="mailto:dennett0610@gmail.com">dennett0610@gmail.com</a>
-      </div>
-      <div class="contact-item">
-        <span class="contact-type">Phone</span>
-        <a class="contact-value" href="tel:+821055848101">+82 10-5584-8101</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<footer>
-  <span>© 2026 Kwanhyeok Choi — Phosynd</span>
-</footer>
-
-<!-- MODAL OVERLAY -->
-<div class="modal-overlay" id="modalOverlay" onclick="closeModalOnBg(event)">
-  <div class="modal" id="modalBox">
-    <button class="modal-close" onclick="closeModal()">
-      <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-        <path d="M4 4l12 12M16 4L4 16" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
-      </svg>
-    </button>
-    <div id="modalContent"></div>
+    <div id="t-hint">최관혁이란 어떤 사람일까요?<kbd>Enter ↵</kbd></div>
+    <button id="enterbtn" onclick="launchMain()">최관혁 알아보기</button>
   </div>
 </div>
 
+<!-- ══ MAIN CONTENT WRAP ══ -->
+<div id="main-wrap">
+
+  <!-- NAV -->
+  <nav id="nav">
+    <a href="#" class="nav-logo">Phosynd</a>
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#work">Work</a>
+      <a href="mailto:dennett0610@gmail.com">Contact</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-text">
+      <p class="hero-label reveal">Product · Strategy · Execution</p>
+      <div class="reveal d1">
+        <span class="hero-name-ko">최관혁</span>
+        <span class="hero-name-en">Kwanhyeok Choi</span>
+      </div>
+      <div class="hero-divider reveal d2"></div>
+      <p class="hero-declaration reveal d2">
+        <em>본질을 먼저 읽고,</em><br>구조를 바꾼다.
+      </p>
+      <div class="hero-tags reveal d3">
+        <span class="hero-tag">크리에이터 이코노미</span>
+        <span class="hero-tag">AI 자동화</span>
+        <span class="hero-tag">콘텐츠 전략</span>
+        <span class="hero-tag">22세</span>
+      </div>
+    </div>
+
+    <div class="hero-visual reveal d2">
+      <div class="hero-photo-wrap">
+        <div class="hero-card hero-card-1">
+          <div class="hero-card-num">99.9%</div>
+          <div class="hero-card-label">작업시간 절감</div>
+        </div>
+        <img class="hero-photo" src="./assets/photo.jpg" alt="최관혁"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="hero-photo-placeholder" style="display:none">
+          <span>PHOTO.JPG</span>
+          <span>./assets/photo.jpg</span>
+        </div>
+        <div class="hero-card hero-card-2">
+          <div class="hero-card-num">$1.07M</div>
+          <div class="hero-card-label">수익 전환</div>
+        </div>
+        <div class="hero-deco-sq"></div>
+      </div>
+    </div>
+
+    <div class="hero-scroll">
+      <div class="hero-scroll-line"></div>
+      <span class="hero-scroll-text">Scroll</span>
+    </div>
+  </section>
+
+  <!-- MARQUEE -->
+  <div id="marquee">
+    <div class="marquee-row">
+      <div class="marquee-track" aria-hidden="true">
+        <span class="marquee-item bright">본질을 먼저 읽는다</span>
+        <span class="marquee-item">·</span>
+        <span class="marquee-item bright">기획력</span>
+        <span class="marquee-item">·</span>
+        <span class="marquee-item">AI 자동화</span>
+        <span class="marquee-item">·</span>
+        <span class="marquee-item">해병대 출신</span>
+        <span class="marquee-item">·</span>
+        <span class="marquee-item bright">크리에이터 이코노미</span>
+        <span class="marquee-item">·</span>
+        <span class="marquee-item">영상 7년</span>
+        <span class="marquee-item">·</span>
+        <span class="marquee-item bright">구조를 바꾼다</span>
+        <span class="marquee-item">·</span>
+        <span class="marquee-item">통찰력</span>
+        <span class="marquee-item">·</span>
+        <span class="marquee-item">문제 정의</span>
+        <span class="marquee-item">·</span>
+        <span class="marquee-item bright">실행력</span>
+        <span class="marquee-item">·</span>
+        <span class="marquee-item bright">본질을 먼저 읽는다</span>
+        <span class="marquee-item">·</span>
+        <span class="marquee-item bright">기획력</span>
+        <span class="marquee-item">·</span>
+        <span class="marquee-item">AI 자동화</span>
+        <span class="marquee-item">·</span>
+        <span class="marquee-item">해병대 출신</span>
+        <span class="marquee-item">·</span>
+        <span class="marquee-item bright">크리에이터 이코노미</span>
+        <span class="marquee-item">·</span>
+        <span class="marquee-item">영상 7년</span>
+        <span class="marquee-item">·</span>
+        <span class="marquee-item bright">구조를 바꾼다</span>
+        <span class="marquee-item">·</span>
+        <span class="marquee-item">통찰력</span>
+        <span class="marquee-item">·</span>
+        <span class="marquee-item">문제 정의</span>
+        <span class="marquee-item">·</span>
+        <span class="marquee-item bright">실행력</span>
+        <span class="marquee-item">·</span>
+      </div>
+    </div>
+    <div class="marquee-row">
+      <div class="marquee-track reverse" aria-hidden="true">
+        <span class="marquee-item bright">$1.07M</span>
+        <span class="marquee-item">·</span>
+        <span class="marquee-item bright">+74.48% GMV</span>
+        <span class="marquee-item">·</span>
+        <span class="marquee-item">99.9% 절감</span>
+        <span class="marquee-item">·</span>
+        <span class="marquee-item bright">메타 광고 7위</span>
+        <span class="marquee-item">·</span>
+        <span class="marquee-item">신입 1위</span>
+        <span class="marquee-item">·</span>
+        <span class="marquee-item">TikTok Shop 뷰티 1위</span>
+        <span class="marquee-item">·</span>
+        <span class="marquee-item">Python</span>
+        <span class="marquee-item">·</span>
+        <span class="marquee-item bright">Brand501</span>
+        <span class="marquee-item">·</span>
+        <span class="marquee-item">300hrs saved</span>
+        <span class="marquee-item">·</span>
+        <span class="marquee-item bright">Phosynd</span>
+        <span class="marquee-item">·</span>
+        <span class="marquee-item bright">$1.07M</span>
+        <span class="marquee-item">·</span>
+        <span class="marquee-item bright">+74.48% GMV</span>
+        <span class="marquee-item">·</span>
+        <span class="marquee-item">99.9% 절감</span>
+        <span class="marquee-item">·</span>
+        <span class="marquee-item bright">메타 광고 7위</span>
+        <span class="marquee-item">·</span>
+        <span class="marquee-item">신입 1위</span>
+        <span class="marquee-item">·</span>
+        <span class="marquee-item">TikTok Shop 뷰티 1위</span>
+        <span class="marquee-item">·</span>
+        <span class="marquee-item">Python</span>
+        <span class="marquee-item">·</span>
+        <span class="marquee-item bright">Brand501</span>
+        <span class="marquee-item">·</span>
+        <span class="marquee-item">300hrs saved</span>
+        <span class="marquee-item">·</span>
+        <span class="marquee-item bright">Phosynd</span>
+        <span class="marquee-item">·</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="about-left">
+      <p class="about-section-label reveal">/ 최관혁이라는 사람</p>
+      <h2 class="about-headline reveal d1">
+        남들이 표면을<br>볼 때,<br>
+        <em>나는 구조를<br>본다.</em>
+      </h2>
+      <a href="#work" class="arrow-link reveal d2">
+        더 알아보기 <span>→</span>
+      </a>
+    </div>
+    <div class="about-right">
+      <div class="principle-card reveal d1">
+        <p class="principle-num">01</p>
+        <p class="principle-title">문제를 먼저 정의한다</p>
+        <p class="principle-desc">잘못된 문제를 열심히 푸는 것만큼 비효율적인 건 없다</p>
+      </div>
+      <div class="principle-card reveal d2">
+        <p class="principle-num">02</p>
+        <p class="principle-title">뻔한 곳에 답은 없다</p>
+        <p class="principle-desc">이미 누군가 풀었을 테니까</p>
+      </div>
+      <div class="principle-card reveal d3">
+        <p class="principle-num">03</p>
+        <p class="principle-title">실행하지 않는 통찰은 그냥 생각이다</p>
+        <p class="principle-desc">이해와 실행 사이의 거리를 없애는 것이 먼저다</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- WORK -->
+  <section id="work">
+    <div class="work-header reveal">
+      <h2 class="work-title">Selected Work</h2>
+      <a href="#" class="arrow-link">전체 보기 <span>→</span></a>
+    </div>
+    <div class="work-cards">
+      <a href="#" class="work-card reveal d1">
+        <div class="work-card-top">
+          <span class="work-card-num">01</span>
+          <span class="work-card-cat">GMV 자동화</span>
+        </div>
+        <div class="work-card-metric">99.9%</div>
+        <p class="work-card-tagline">반복 업무를 자동화해<br>팀의 시간을 되돌려줬다</p>
+        <p class="work-card-desc">AI + Python으로 직접 구축한 자동화 시스템. 300시간의 반복 작업이 사라졌다.</p>
+        <div class="work-card-arrow">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M3 8h10M9 4l4 4-4 4"/>
+          </svg>
+        </div>
+      </a>
+      <a href="#" class="work-card reveal d2">
+        <div class="work-card-top">
+          <span class="work-card-num">02</span>
+          <span class="work-card-cat">매출 전략 전환</span>
+        </div>
+        <div class="work-card-metric">+74.48%</div>
+        <p class="work-card-tagline">원인을 분석하고 전략을 바꿔<br>매출을 뒤집었다</p>
+        <p class="work-card-desc">수익 $616K → $1.07M. 데이터로 문제를 정의하고 방향을 전환했다.</p>
+        <div class="work-card-arrow">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M3 8h10M9 4l4 4-4 4"/>
+          </svg>
+        </div>
+      </a>
+      <a href="#" class="work-card reveal d3">
+        <div class="work-card-top">
+          <span class="work-card-num">03</span>
+          <span class="work-card-cat">메타 전환광고</span>
+        </div>
+        <div class="work-card-metric">신입 1위</div>
+        <p class="work-card-tagline">데이터 기반으로 제작한<br>영상이 상위권을 기록했다</p>
+        <p class="work-card-desc">메타 전환광고 200개 중 7위. 신입으로는 단독 1위를 달성했다.</p>
+        <div class="work-card-arrow">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M3 8h10M9 4l4 4-4 4"/>
+          </svg>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- CONTACT FOOTER -->
+  <footer id="contact">
+    <p class="contact-label reveal">/ contact</p>
+    <h2 class="contact-headline reveal d1">
+      여기까지<br>읽었다면,<br>
+      <em>다음은<br>대화입니다.</em>
+    </h2>
+    <a href="mailto:dennett0610@gmail.com" class="contact-email reveal d2">
+      dennett0610@gmail.com
+    </a>
+    <div class="contact-footer-bar reveal d3">
+      <span class="contact-copy">© 2026 Kwanhyeok Choi — Phosynd</span>
+      <span class="contact-location">Seoul, KR</span>
+    </div>
+  </footer>
+
+</div><!-- /#main-wrap -->
+
 <script>
-  /* ── MODAL DATA ── */
-  const modals = {
-    w1: {
-      num: '01',
-      ko: {
-        title: 'GMV 자동화',
-        problem: `크리에이터 3만 명의 GMV 데이터를 매주 수작업으로 집계하고 있었다.\n팀 전체가 300시간을 반복 작업에 쏟고 있었고, 그 시간에 전략적 판단은 없었다.`,
-        did: `AI와 파이썬을 독학해 자동화 시스템을 직접 설계하고 구축했다.\n데이터 수집 → 정리 → 보고까지 전 과정을 자동화했다.`,
-        results: [
-          { main: '99.9%', label: '팀 작업시간 절감 (300h → 0h)' },
-          { main: '3만 명', label: '크리에이터 데이터 실시간 관리' },
-        ]
-      },
-      en: {
-        title: 'GMV Automation',
-        problem: `GMV data for 30,000 creators was being compiled manually every week.\nThe entire team was spending 300 hours on repetitive work — with no time left for strategic thinking.`,
-        did: `Taught myself AI and Python, then designed and built an automation system from scratch.\nAutomated the entire pipeline: data collection → organization → reporting.`,
-        results: [
-          { main: '99.9%', label: 'Reduction in team work hours (300h → 0h)' },
-          { main: '30K', label: 'Creator data points managed in real time' },
-        ]
+// ═══════════════════════════════════════════════════
+// CONSTANTS
+// ═══════════════════════════════════════════════════
+const W = window.innerWidth, H = window.innerHeight;
+const CX = W/2, CY = H/2;
+const DPR = Math.min(window.devicePixelRatio||1, 2);
+
+// ═══════════════════════════════════════════════════
+// CANVAS SETUP
+// ═══════════════════════════════════════════════════
+const chaosC = document.getElementById('cc');
+const selC   = document.getElementById('sc');
+[chaosC, selC].forEach(c => {
+  c.width = W*DPR; c.height = H*DPR;
+  c.style.width = W+'px'; c.style.height = H+'px';
+});
+const cx = chaosC.getContext('2d'); cx.scale(DPR,DPR);
+const sx = selC.getContext('2d');   sx.scale(DPR,DPR);
+
+// ═══════════════════════════════════════════════════
+// PHASE 1 — LIGHT BULB
+// ═══════════════════════════════════════════════════
+function sampleCubic(ax,ay,bx,by,ccx,ccy,dx,dy,n){
+  const pts=[];
+  for(let i=1;i<=n;i++){
+    const t=i/n,m=1-t;
+    pts.push({
+      x:m*m*m*ax+3*m*m*t*bx+3*m*t*t*ccx+t*t*t*dx,
+      y:m*m*m*ay+3*m*m*t*by+3*m*t*t*ccy+t*t*t*dy
+    });
+  }
+  return pts;
+}
+
+function buildBulbPoints(bcx,bcy,sc){
+  const pts=[];
+  const C=(ax,ay,c1x,c1y,c2x,c2y,ex,ey,n=22)=>{
+    pts.push(...sampleCubic(ax,ay,c1x,c1y,c2x,c2y,ex,ey,n));
+  };
+  pts.push({x:bcx,y:bcy-82*sc,move:true});
+  C(bcx,      bcy-82*sc,  bcx+64*sc,bcy-82*sc,  bcx+66*sc,bcy-12*sc,  bcx+58*sc,bcy-1*sc, 28);
+  C(bcx+58*sc,bcy-1*sc,   bcx+52*sc,bcy+18*sc,  bcx+28*sc,bcy+30*sc,  bcx+22*sc,bcy+36*sc, 16);
+  C(bcx+22*sc,bcy+36*sc, bcx+22*sc,bcy+56*sc, bcx+22*sc,bcy+62*sc, bcx+14*sc,bcy+64*sc, 8);
+  C(bcx+14*sc,bcy+64*sc, bcx+4*sc,bcy+65*sc, bcx-4*sc,bcy+65*sc, bcx-14*sc,bcy+64*sc, 8);
+  C(bcx-14*sc,bcy+64*sc, bcx-22*sc,bcy+62*sc, bcx-22*sc,bcy+56*sc, bcx-22*sc,bcy+54*sc, 6);
+  C(bcx-22*sc,bcy+54*sc, bcx-22*sc,bcy+52*sc, bcx-20*sc,bcy+54*sc, bcx-12*sc,bcy+54*sc, 6);
+  C(bcx-12*sc,bcy+54*sc, bcx-4*sc,bcy+54*sc, bcx+4*sc,bcy+54*sc, bcx+12*sc,bcy+54*sc, 8);
+  C(bcx+12*sc,bcy+54*sc, bcx+20*sc,bcy+54*sc, bcx+22*sc,bcy+52*sc, bcx+22*sc,bcy+45*sc, 6);
+  C(bcx+22*sc,bcy+45*sc, bcx+22*sc,bcy+43*sc, bcx+20*sc,bcy+45*sc, bcx+12*sc,bcy+45*sc, 6);
+  C(bcx+12*sc,bcy+45*sc, bcx+4*sc,bcy+45*sc, bcx-4*sc,bcy+45*sc, bcx-12*sc,bcy+45*sc, 8);
+  C(bcx-12*sc,bcy+45*sc, bcx-20*sc,bcy+45*sc, bcx-22*sc,bcy+43*sc, bcx-22*sc,bcy+36*sc, 6);
+  C(bcx-22*sc,bcy+36*sc,  bcx-28*sc,bcy+30*sc,  bcx-52*sc,bcy+18*sc,  bcx-58*sc,bcy-1*sc, 16);
+  C(bcx-58*sc,bcy-1*sc,   bcx-66*sc,bcy-12*sc,  bcx-64*sc,bcy-82*sc,  bcx,bcy-82*sc, 28);
+  C(bcx,bcy-82*sc,  bcx,bcy-60*sc,  bcx,bcy-42*sc,  bcx,bcy-30*sc, 12);
+  C(bcx,bcy-30*sc,  bcx+16*sc,bcy-30*sc,  bcx+24*sc,bcy-10*sc,  bcx+20*sc,bcy+8*sc, 18);
+  C(bcx+20*sc,bcy+8*sc, bcx+20*sc,bcy+28*sc, bcx+20*sc,bcy+34*sc, bcx+12*sc,bcy+36*sc, 8);
+  C(bcx+12*sc,bcy+36*sc, bcx+4*sc,bcy+36*sc, bcx-4*sc,bcy+36*sc, bcx-12*sc,bcy+36*sc, 8);
+  C(bcx-12*sc,bcy+36*sc, bcx-20*sc,bcy+34*sc, bcx-20*sc,bcy+28*sc, bcx-20*sc,bcy+8*sc, 8);
+  C(bcx-20*sc,bcy+8*sc,  bcx-24*sc,bcy-10*sc,  bcx-16*sc,bcy-30*sc,  bcx,bcy-30*sc, 18);
+  return pts;
+}
+
+// ═══════════════════════════════════════════════════
+// MAC CURSOR
+// ═══════════════════════════════════════════════════
+const MC=document.getElementById('mc');
+let mcX=-200,mcY=-200;
+function showMC(x,y){mcX=x;mcY=y;MC.style.transform=`translate(${x}px,${y}px)`;MC.style.opacity='1';}
+function hideMC(){MC.style.opacity='0';}
+function moveMCTo(x,y){mcX=x;mcY=y;MC.style.transform=`translate(${x}px,${y}px)`;}
+
+// ═══════════════════════════════════════════════════
+// WORKFLOW BUILDER
+// ═══════════════════════════════════════════════════
+const SCENE=document.getElementById('wf-scene');
+const WSVG=document.getElementById('wf-svg');
+WSVG.setAttribute('viewBox','0 0 5200 3000');
+WSVG.setAttribute('preserveAspectRatio','xMidYMid meet');
+
+const NW=270,NH=128,GH=100,GV=130;
+const GX=2600-(NW*3+GH*2)/2;
+const GY=1500-(NH*2+GV)/2;
+
+const CORE=[
+  {id:'n1',c:0,r:0,tag:'TRIGGER',  title:'문제 발견',   code:'pain_point.detect()'},
+  {id:'n2',c:1,r:0,tag:'PROCESS',  title:'데이터 분석', code:'root_cause.analyze()',badge:'running'},
+  {id:'n3',c:2,r:0,tag:'DESIGN',   title:'구조 설계',   code:'system.architect()'},
+  {id:'n4',c:2,r:1,tag:'AUTOMATE', title:'자동화 실행', code:'workflow.execute()'},
+  {id:'n5',c:1,r:1,tag:'VERIFY',   title:'결과 검증',   code:'metrics.validate()'},
+  {id:'n6',c:0,r:1,tag:'COMPLETE', title:'솔루션 완성', code:'problem.solved=true'},
+];
+
+const NP={};
+const NEL={};
+
+CORE.forEach(n=>{
+  const x=GX+n.c*(NW+GH), y=GY+n.r*(NH+GV);
+  NP[n.id]={x,y,cx:x+NW/2,cy:y+NH/2,rx:x+NW,lx:x,ty:y,by:y+NH};
+  const el=document.createElement('div');
+  el.className='wn'; el.id=n.id;
+  el.style.left=x+'px'; el.style.top=y+'px'; el.style.width=NW+'px'; el.style.height=NH+'px';
+  el.innerHTML=`${n.badge?`<div class="wn-badge">${n.badge}</div>`:''}
+    <div class="wn-tag">${n.tag}</div>
+    <div class="wn-title">${n.title}</div>
+    <div class="wn-code">${n.code}</div>`;
+  SCENE.appendChild(el);
+  NEL[n.id]=el;
+});
+
+const p=id=>NP[id];
+const CLINES=[
+  {id:'l12',x1:p('n1').rx,y1:p('n1').cy,x2:p('n2').lx,y2:p('n2').cy},
+  {id:'l23',x1:p('n2').rx,y1:p('n2').cy,x2:p('n3').lx,y2:p('n3').cy},
+  {id:'l34',x1:p('n3').cx,y1:p('n3').by,x2:p('n4').cx,y2:p('n4').ty},
+  {id:'l45',x1:p('n4').lx,y1:p('n4').cy,x2:p('n5').rx,y2:p('n5').cy},
+  {id:'l56',x1:p('n5').lx,y1:p('n5').cy,x2:p('n6').rx,y2:p('n6').cy},
+];
+CLINES.forEach(l=>{
+  const len=Math.hypot(l.x2-l.x1,l.y2-l.y1);
+  const line=document.createElementNS('http://www.w3.org/2000/svg','line');
+  ['x1','y1','x2','y2'].forEach(a=>line.setAttribute(a,l[a]));
+  line.setAttribute('class','wfl wfl-core');
+  line.setAttribute('stroke-dasharray',len);
+  line.setAttribute('stroke-dashoffset',len);
+  line.id=l.id; WSVG.appendChild(line);
+  [l.x1,l.y1,l.x2,l.y2].forEach((v,i)=>{
+    const d=document.createElementNS('http://www.w3.org/2000/svg','circle');
+    d.setAttribute('cx',i<2?l.x1:l.x2);
+    d.setAttribute('cy',i<2?l.y1:l.y2);
+    d.setAttribute('r',3.5); d.setAttribute('class','wdot');
+    d.id=`dot_${l.id}_${i<2?'s':'e'}`; WSVG.appendChild(d);
+  });
+});
+
+const GHOST_DATA=[
+  {tag:'INPUT',   title:'데이터 수집',    cx:1870, cy:1371, parent:'n1'},
+  {tag:'FILTER',  title:'이상값 제거',    cx:1510, cy:1371, parent:0},
+  {tag:'BRIEF',   title:'프로젝트 브리프', cx:1930, cy:1161, parent:'n1'},
+  {tag:'USER',    title:'유저 리서치',    cx:1630, cy: 951, parent:2},
+  {tag:'KPI',     title:'KPI 설정',      cx:2440, cy:1101, parent:'n2'},
+  {tag:'OKR',     title:'목표 정렬',      cx:2600, cy:1101, parent:'n2'},
+  {tag:'BENCH',   title:'벤치마킹',      cx:2600, cy: 831, parent:5},
+  {tag:'ROAD',    title:'로드맵 수립',    cx:2760, cy:1101, parent:'n2'},
+  {tag:'VISION',  title:'비전 설계',      cx:3270, cy:1161, parent:'n3'},
+  {tag:'STRAT',   title:'전략 수립',      cx:3570, cy: 951, parent:8},
+  {tag:'PROTO',   title:'프로토타입',     cx:3330, cy:1371, parent:'n3'},
+  {tag:'SCALE',   title:'자동화 확장',    cx:3690, cy:1371, parent:10},
+  {tag:'LOOP',    title:'반복 최적화',    cx:3330, cy:1629, parent:'n4'},
+  {tag:'MONITOR', title:'실시간 모니터',  cx:3270, cy:1839, parent:'n4'},
+  {tag:'ALERT',   title:'이상 알림',      cx:3570, cy:2049, parent:13},
+  {tag:'METRIC',  title:'지표 대시보드',  cx:2440, cy:1899, parent:'n5'},
+  {tag:'REPORT',  title:'성과 리포트',    cx:2600, cy:1899, parent:'n5'},
+  {tag:'ARCHIVE', title:'결과 아카이브',  cx:2600, cy:2169, parent:16},
+  {tag:'LOG',     title:'실행 로그',      cx:2760, cy:1899, parent:'n5'},
+  {tag:'DEPLOY',  title:'배포/적용',      cx:2230, cy:1899, parent:'n6'},
+  {tag:'REVIEW',  title:'회고 분석',      cx:1870, cy:1629, parent:'n6'},
+  {tag:'IMPROVE', title:'개선안 도출',    cx:1510, cy:1629, parent:20},
+  {tag:'RETRO',   title:'스프린트 회고',  cx:1930, cy:1839, parent:'n6'},
+];
+
+const ghostEls=[], ghostLines=[];
+GHOST_DATA.forEach((g,i)=>{
+  const el=document.createElement('div');
+  el.className='wg';
+  el.style.left=(g.cx-94)+'px';
+  el.style.top =(g.cy-45)+'px';
+  el.innerHTML=`<div class="wg-tag">${g.tag}</div><div class="wg-title">${g.title}</div>`;
+  SCENE.appendChild(el); ghostEls.push(el);
+});
+GHOST_DATA.forEach((g,i)=>{
+  const gl=document.createElementNS('http://www.w3.org/2000/svg','line');
+  gl.setAttribute('x1',g.cx); gl.setAttribute('y1',g.cy);
+  const px=typeof g.parent==='string'?NP[g.parent].cx:GHOST_DATA[g.parent].cx;
+  const py=typeof g.parent==='string'?NP[g.parent].cy:GHOST_DATA[g.parent].cy;
+  gl.setAttribute('x2',px); gl.setAttribute('y2',py);
+  gl.setAttribute('class','wfl wfl-ghost'); WSVG.appendChild(gl);
+  ghostLines.push(gl);
+});
+
+// ═══════════════════════════════════════════════════
+// TERMINAL LINES
+// ═══════════════════════════════════════════════════
+const TLINES=[
+  `Initializing <span class="acc">phosynd.core</span> v2.0...`,
+  `Loading system modules...`,
+  `[<span class="ok">OK</span>] pattern_recognition <span class="dim">............</span> loaded`,
+  `[<span class="ok">OK</span>] data_pipeline <span class="dim">................</span> loaded`,
+  `[<span class="ok">OK</span>] workflow_engine <span class="dim">...............</span> loaded`,
+  `[<span class="ok">OK</span>] ai_optimizer <span class="dim">..................</span> loaded`,
+  `[<span class="ok">OK</span>] content_analyzer <span class="dim">.............</span> loaded`,
+  `[<span class="ok">OK</span>] metric_tracker <span class="dim">................</span> loaded`,
+  `[<span class="ok">OK</span>] automation_builder <span class="dim">..........</span> loaded`,
+  `[<span class="ok">OK</span>] insight_extractor <span class="dim">............</span> loaded`,
+  ``,
+  `Establishing API connections...`,
+  `Connecting TikTok Shop API<span class="dim">.......</span> <span class="ok">[OK]</span> authenticated`,
+  `Connecting Meta Ads API<span class="dim">..........</span> <span class="ok">[OK]</span> authenticated`,
+  `Connecting Analytics Engine<span class="dim">......</span> <span class="ok">[OK]</span> connected`,
+  `Connecting GMV Database<span class="dim">..........</span> <span class="ok">[OK]</span> 14 workflows`,
+  ``,
+  `Scanning for inefficiencies<span class="dim">...</span>`,
+  `<span class="dim">  ├─</span> Analyzing 1,247 data points across 14 workflows`,
+  `<span class="dim">  ├─</span> Identified: <span class="err">23</span> redundant manual processes`,
+  `<span class="dim">  ├─</span> Identified: <span class="acc">8</span> optimization opportunities`,
+  `<span class="dim">  ├─</span> GMV tracking — manual entry: <span class="err">300hrs/month</span>`,
+  `<span class="dim">  └─</span> Estimated waste: <span class="err">$48,000/year</span>`,
+  ``,
+  `Building automation framework<span class="dim">...</span>`,
+  `<span class="dim">  ├─</span> Mapping data sources<span class="dim">...........</span> <span class="ok">done</span>`,
+  `<span class="dim">  ├─</span> Designing automation nodes<span class="dim">......</span> 6 nodes created`,
+  `<span class="dim">  ├─</span> Configuring triggers<span class="dim">............</span> <span class="ok">done</span>`,
+  `<span class="dim">  ├─</span> Setting up error handling<span class="dim">.......</span> <span class="ok">done</span>`,
+  `<span class="dim">  ├─</span> Building validation layer<span class="dim">.......</span> <span class="ok">done</span>`,
+  `<span class="dim">  └─</span> Compiling workflow<span class="dim">...............</span> <span class="ok">done</span>`,
+  ``,
+  `Running diagnostics<span class="dim">...</span>`,
+  `<span class="dim">  ├─</span> GMV automation test<span class="dim">......... </span><span class="ok">PASS</span> — <span class="acc">99.9%</span> time reduction`,
+  `<span class="dim">  ├─</span> Revenue tracking<span class="dim">............. </span><span class="ok">PASS</span> — accuracy 100%`,
+  `<span class="dim">  ├─</span> Content scoring engine<span class="dim">....... </span><span class="ok">PASS</span> — 200 assets`,
+  `<span class="dim">  ├─</span> Meta conversion rank<span class="dim">......... </span><span class="ok">PASS</span> — <span class="acc">#7/200</span> 신입 1위`,
+  `<span class="dim">  ├─</span> Strategy validation<span class="dim">.......... </span><span class="ok">PASS</span> — <span class="acc">+74.48%</span>`,
+  `<span class="dim">  └─</span> Revenue impact<span class="dim">............... </span><span class="ok">PASS</span> — <span class="acc">$616K → $1.07M</span>`,
+  ``,
+  `Deploying to production<span class="dim">...</span>`,
+  `<span class="dim">  ├─</span> Workflow nodes: <span class="acc">6 active</span>`,
+  `<span class="dim">  ├─</span> Automation coverage: <span class="acc">99.9%</span>`,
+  `<span class="dim">  ├─</span> Team hours saved: <span class="acc">300hrs/month</span>`,
+  `<span class="dim">  ├─</span> Revenue delta: <span class="acc">+$454,000</span>`,
+  `<span class="dim">  ├─</span> Efficiency rating: <span class="ok">A+</span>`,
+  `<span class="dim">  └─</span> Status: <span class="ok">LIVE</span>`,
+  ``,
+  `<span class="dim">────────────────────────────────────────────────────</span>`,
+  `<span class="ok">All systems operational.</span>`,
+  `<span class="acc">phosynd.core</span> initialized successfully.`,
+  ``,
+];
+
+// ═══════════════════════════════════════════════════
+// AUDIO ENGINE
+// ═══════════════════════════════════════════════════
+let _AC=null, _soundEnabled=false;
+function _getAC(){
+  if(!_AC){try{_AC=new(window.AudioContext||window.webkitAudioContext)();}catch(e){}}
+  return _AC;
+}
+(()=>{
+  const btn=document.createElement('div');
+  btn.id='sndbtn';
+  btn.style.cssText='position:fixed;top:14px;right:16px;z-index:10000;cursor:pointer;opacity:.28;font-size:17px;transition:opacity .2s;user-select:none;line-height:1;';
+  btn.textContent='🔇';
+  btn.title='효과음 켜기';
+  btn.addEventListener('mouseenter',()=>btn.style.opacity='0.8');
+  btn.addEventListener('mouseleave',()=>btn.style.opacity=_soundEnabled?'0.8':'0.28');
+  btn.addEventListener('click',()=>{
+    _soundEnabled=!_soundEnabled;
+    btn.textContent=_soundEnabled?'🔊':'🔇';
+    btn.style.opacity=_soundEnabled?'0.8':'0.28';
+    btn.title=_soundEnabled?'효과음 끄기':'효과음 켜기';
+    const ac=_getAC();
+    if(ac&&ac.state==='suspended') ac.resume();
+  });
+  document.getElementById('opening-wrap').appendChild(btn);
+})();
+
+function _noiseBuf(ac,dur,vol){
+  const buf=ac.createBuffer(1,Math.floor(ac.sampleRate*dur),ac.sampleRate);
+  const d=buf.getChannelData(0);
+  for(let i=0;i<d.length;i++) d[i]=(Math.random()*2-1)*vol;
+  return buf;
+}
+function _play(fn){
+  if(!_soundEnabled) return;
+  const ac=_getAC(); if(!ac) return;
+  if(ac.state==='suspended') ac.resume();
+  try{ fn(ac,ac.currentTime); }catch(e){}
+}
+function sndStroke(){
+  _play((ac,t)=>{
+    const src=ac.createBufferSource();
+    src.buffer=_noiseBuf(ac,0.13,0.22);
+    const f=ac.createBiquadFilter(); f.type='bandpass'; f.frequency.value=2600; f.Q.value=1.1;
+    const g=ac.createGain();
+    g.gain.setValueAtTime(0,t); g.gain.linearRampToValueAtTime(0.11,t+.016); g.gain.exponentialRampToValueAtTime(.0001,t+.12);
+    src.connect(f); f.connect(g); g.connect(ac.destination); src.start();
+  });
+}
+function sndGlow(){
+  _play((ac,t)=>{
+    const o1=ac.createOscillator(); o1.type='sine';
+    o1.frequency.setValueAtTime(90,t); o1.frequency.exponentialRampToValueAtTime(55,t+.7);
+    const g1=ac.createGain();
+    g1.gain.setValueAtTime(0,t); g1.gain.linearRampToValueAtTime(.07,t+.05); g1.gain.exponentialRampToValueAtTime(.0001,t+.72);
+    o1.connect(g1); g1.connect(ac.destination); o1.start(); o1.stop(t+.75);
+    const o2=ac.createOscillator(); o2.type='sine';
+    o2.frequency.setValueAtTime(520,t); o2.frequency.exponentialRampToValueAtTime(880,t+.22); o2.frequency.exponentialRampToValueAtTime(660,t+.5);
+    const g2=ac.createGain();
+    g2.gain.setValueAtTime(0,t); g2.gain.linearRampToValueAtTime(.038,t+.06); g2.gain.exponentialRampToValueAtTime(.0001,t+.55);
+    o2.connect(g2); g2.connect(ac.destination); o2.start(); o2.stop(t+.58);
+  });
+}
+function sndFlare(){
+  _play((ac,t)=>{
+    const src=ac.createBufferSource(); src.buffer=_noiseBuf(ac,.2,.45);
+    const f=ac.createBiquadFilter(); f.type='highpass'; f.frequency.value=1100;
+    const g=ac.createGain();
+    g.gain.setValueAtTime(0,t); g.gain.linearRampToValueAtTime(.24,t+.003); g.gain.exponentialRampToValueAtTime(.0001,t+.19);
+    src.connect(f); f.connect(g); g.connect(ac.destination); src.start();
+    const o=ac.createOscillator(); o.type='sawtooth';
+    o.frequency.setValueAtTime(1400,t); o.frequency.exponentialRampToValueAtTime(160,t+.22);
+    const g2=ac.createGain();
+    g2.gain.setValueAtTime(.08,t); g2.gain.exponentialRampToValueAtTime(.0001,t+.22);
+    o.connect(g2); g2.connect(ac.destination); o.start(); o.stop(t+.24);
+  });
+}
+function sndWhoosh(){
+  _play((ac,t)=>{
+    const dur=.7;
+    const src=ac.createBufferSource(); src.buffer=_noiseBuf(ac,dur,.5);
+    const f=ac.createBiquadFilter(); f.type='bandpass'; f.Q.value=1.6;
+    f.frequency.setValueAtTime(160,t); f.frequency.exponentialRampToValueAtTime(5000,t+dur);
+    const g=ac.createGain();
+    g.gain.setValueAtTime(0,t); g.gain.linearRampToValueAtTime(.2,t+.07); g.gain.exponentialRampToValueAtTime(.0001,t+dur);
+    src.connect(f); f.connect(g); g.connect(ac.destination); src.start();
+  });
+}
+function sndNodePop(){
+  _play((ac,t)=>{
+    const o=ac.createOscillator(); o.type='sine';
+    o.frequency.setValueAtTime(560,t); o.frequency.exponentialRampToValueAtTime(190,t+.09);
+    const g=ac.createGain();
+    g.gain.setValueAtTime(.055,t); g.gain.exponentialRampToValueAtTime(.0001,t+.1);
+    o.connect(g); g.connect(ac.destination); o.start(); o.stop(t+.11);
+  });
+}
+function sndLine(){
+  _play((ac,t)=>{
+    const src=ac.createBufferSource(); src.buffer=_noiseBuf(ac,.1,.18);
+    const f=ac.createBiquadFilter(); f.type='bandpass'; f.frequency.value=1000; f.Q.value=2.8;
+    const g=ac.createGain();
+    g.gain.setValueAtTime(0,t); g.gain.linearRampToValueAtTime(.08,t+.01); g.gain.exponentialRampToValueAtTime(.0001,t+.09);
+    src.connect(f); f.connect(g); g.connect(ac.destination); src.start();
+  });
+}
+function sndType(){
+  _play((ac,t)=>{
+    const src=ac.createBufferSource(); src.buffer=_noiseBuf(ac,.04,.3);
+    const f=ac.createBiquadFilter(); f.type='bandpass'; f.frequency.value=1900; f.Q.value=1.6;
+    const g=ac.createGain();
+    g.gain.setValueAtTime(0,t); g.gain.linearRampToValueAtTime(.13,t+.004); g.gain.exponentialRampToValueAtTime(.0001,t+.036);
+    src.connect(f); f.connect(g); g.connect(ac.destination); src.start();
+  });
+}
+
+// ═══════════════════════════════════════════════════
+// UTILITY
+// ═══════════════════════════════════════════════════
+const delay=ms=>new Promise(r=>setTimeout(r,ms));
+
+function animTo(fromX,fromY,toX,toY,dur,onUpdate,onDone){
+  const t0=performance.now();
+  const step=now=>{
+    const t=Math.min((now-t0)/dur,1);
+    const e=t<0.5?2*t*t:-1+(4-2*t)*t;
+    onUpdate(fromX+(toX-fromX)*e, fromY+(toY-fromY)*e, t);
+    if(t<1) requestAnimationFrame(step); else if(onDone) onDone();
+  };
+  requestAnimationFrame(step);
+}
+
+// ═══════════════════════════════════════════════════
+// MAIN SEQUENCE
+// ═══════════════════════════════════════════════════
+async function run(){
+  await document.fonts.ready;
+
+  const hsc=Math.min(H/700, W/900);
+  const bcx=W*0.5, bcy=H*0.46;
+
+  const bulbPts=buildBulbPoints(bcx,bcy,hsc);
+  const bulbTotal=bulbPts.length;
+
+  const oC=document.createElement('canvas');
+  oC.width=W*DPR; oC.height=H*DPR;
+  const oCtx=oC.getContext('2d');
+  oCtx.scale(DPR,DPR);
+  oCtx.strokeStyle='rgba(188,198,255,0.95)';
+  oCtx.lineWidth=2.2*hsc;
+  oCtx.lineCap='round';
+  oCtx.lineJoin='round';
+
+  let bulbProgress=0, lastProg=0;
+  let p1alive=true;
+  let bulbGlow=0, bulbGlowDir=1, bulbFlaring=false;
+  let zoomScale=1;
+  const DRAW_DURATION=900;
+  let drawStartTime=null;
+
+  const p1loop=()=>{
+    if(!p1alive){chaosC.style.display='none';return;}
+    cx.clearRect(0,0,W,H);
+    if(drawStartTime!==null){
+      const raw=Math.min(1,(performance.now()-drawStartTime)/DRAW_DURATION);
+      const eased=1-Math.pow(1-raw,2.4);
+      bulbProgress=Math.floor(eased*bulbTotal);
+    }
+    if(bulbProgress>lastProg){
+      oCtx.beginPath();
+      const from=Math.max(0,lastProg-1);
+      for(let i=from;i<bulbProgress;i++){
+        const pt=bulbPts[i];
+        if(i===from||pt.move) oCtx.moveTo(pt.x,pt.y);
+        else oCtx.lineTo(pt.x,pt.y);
       }
-    },
-    w2: {
-      num: '02',
-      ko: {
-        title: '매출 전략 전환',
-        problem: `크리에이터 마케팅 기반의 틱톡샵 사업에서 전체 매출 상위권을 담당하던 제품의 매출이 급감했다.\n팀은 원인 파악 없이 신제품 개발에 집중하며 기존 제품을 방치하고 있었다.`,
-        did: `데이터를 분석해 소비자 흥미 저하의 원인을 특정했다.\n겨울 시즌 미국 북부 타겟 전략의 한계임을 발견하고, 미국 남부 지역으로 타겟 전환을 제안했다.\n크리에이터가 실행할 수 있도록 콘텐츠 방향과 가이드를 직접 설계했다.`,
-        results: [
-          { main: '+74.48%', label: 'GMV 성장' },
-          { main: '$1.07M', label: '수익 ($616K에서 전환)' },
-        ]
-      },
-      en: {
-        title: 'Revenue Strategy Pivot',
-        problem: `In a TikTok Shop business driven by creator marketing, a top-selling product experienced a sudden drop in sales.\nThe team was focused on developing new products, leaving the existing one unattended.`,
-        did: `Analyzed data to identify the root cause of declining consumer interest.\nDiscovered the limitation of a winter-season strategy targeting northern U.S. audiences.\nProposed a pivot to target southern U.S. regions instead.\nDesigned content direction and guidelines for creators to execute.`,
-        results: [
-          { main: '+74.48%', label: 'GMV growth' },
-          { main: '$1.07M', label: 'Revenue (up from $616K)' },
-        ]
+      oCtx.stroke();
+      lastProg=bulbProgress;
+    }
+    if(bulbProgress>0){
+      if(bulbFlaring){
+        bulbGlow=Math.min(5,bulbGlow+0.07);
+      } else {
+        bulbGlow+=0.028*bulbGlowDir;
+        if(bulbGlow>1) bulbGlowDir=-1;
+        if(bulbGlow<0) bulbGlowDir=1;
       }
-    },
-    w3: {
-      num: '03',
-      ko: {
-        title: '메타 전환광고',
-        problem: `메타 전환광고 제작이 주어졌다. 대부분은 편집 품질을 높이는 방향으로 접근했다.`,
-        did: `편집 전에 먼저 질문을 세웠다.\n"왜 어떤 영상은 구매로 이어지고, 어떤 영상은 이탈로 끝나는가"\n\n전환 실패의 원인이 콘텐츠 품질이 아니라 초반 3초 내 이탈을 막는 구조의 부재라고 정의했다.\n\n경쟁 브랜드(medicube, ANUA 등) 전환광고를 벤치마크 분석해 고전환 영상의 공통 패턴을 도출했다.\n빠른 컷 전환 · 즉각적 결과 노출 · 화면 중앙 자막\n\n이 3가지 구조를 초반 3초에 집중 적용해 구매 링크 클릭까지의 흐름을 직접 설계하고 편집했다.`,
-        results: [
-          { main: '신입 1위', label: '신입 크리에이터 중 최상위' },
-          { main: '7위', label: '메타 전환광고 200개 중' },
-        ]
-      },
-      en: {
-        title: 'Meta Performance Ad',
-        problem: `The task was to produce a Meta conversion ad.\nMost approached it by focusing on improving edit quality.`,
-        did: `Before editing, I asked a different question:\n"Why do some videos lead to purchases, while others end in scroll-off?"\n\nDefined the root cause: not content quality, but the absence of a structure that prevents drop-off within the first 3 seconds.\n\nBenchmarked conversion ads from competing brands (medicube, ANUA, etc.) and extracted common patterns from high-converting videos:\nFast cuts · Immediate result reveal · Center-screen captions\n\nApplied all 3 structures in the first 3 seconds, and designed the full flow through to the purchase link click.`,
-        results: [
-          { main: '#1', label: 'Newcomer ranking' },
-          { main: 'Top 7', label: 'Out of 200 Meta ads' },
-        ]
+      const zx=bcx, zy=bcy-15*hsc;
+      cx.save();
+      cx.translate(zx,zy);
+      cx.scale(zoomScale,zoomScale);
+      cx.translate(-zx,-zy);
+      if(bulbFlaring){
+        const gr=(22+bulbGlow*72)*hsc;
+        const grad=cx.createRadialGradient(bcx,bcy-20*hsc,0,bcx,bcy-20*hsc,gr);
+        grad.addColorStop(0,`rgba(228,234,255,${Math.min(0.6,bulbGlow*0.13)})`);
+        grad.addColorStop(1,'rgba(180,196,255,0)');
+        cx.fillStyle=grad;
+        cx.fillRect(bcx-gr,bcy-20*hsc-gr,gr*2,gr*2);
+      }
+      cx.shadowColor='rgba(205,218,255,1)';
+      cx.shadowBlur=(8+bulbGlow*18)*hsc;
+      cx.drawImage(oC,0,0,W,H);
+      cx.shadowColor='transparent';
+      cx.shadowBlur=0;
+      if(bulbProgress<bulbTotal){
+        const tip=bulbPts[bulbProgress-1];
+        cx.save();
+        cx.beginPath();
+        cx.arc(tip.x,tip.y,3*hsc,0,Math.PI*2);
+        cx.fillStyle='rgba(225,232,255,1)';
+        cx.shadowColor='rgba(200,218,255,1)';
+        cx.shadowBlur=22;
+        cx.fill();
+        cx.restore();
+      }
+      cx.restore();
+      if(zoomScale>3){
+        const t=Math.min(1,(zoomScale-3)/6);
+        cx.fillStyle=`rgba(215,224,255,${t*t})`;
+        cx.fillRect(0,0,W,H);
       }
     }
+    requestAnimationFrame(p1loop);
   };
+  p1loop();
 
-  let currentLang = 'ko';
+  drawStartTime=performance.now();
+  const _drawSndId=setInterval(()=>{ if(bulbProgress<bulbTotal) sndStroke(); else clearInterval(_drawSndId); },80);
+  await delay(DRAW_DURATION+120);
+  clearInterval(_drawSndId);
+  sndGlow();
+  await delay(250);
 
-  /* ── LANG TOGGLE ── */
-  function toggleLang() {
-    currentLang = currentLang === 'ko' ? 'en' : 'ko';
-    const btn = document.getElementById('langBtn');
-    btn.textContent = currentLang === 'ko' ? 'EN' : 'KO';
+  const curSX=W*0.84, curSY=H*0.82;
+  showMC(curSX,curSY);
+  MC.style.transition='none';
+  await delay(100);
 
-    document.querySelectorAll('[data-ko][data-en]').forEach(el => {
-      const val = el.dataset[currentLang];
-      if (val.includes('<br>')) el.innerHTML = val;
-      else el.textContent = val;
-    });
-
-    document.querySelectorAll('[data-lang]').forEach(el => {
-      el.style.display = el.dataset.lang === currentLang ? '' : 'none';
-    });
-  }
-
-  /* ── MODAL ── */
-  function openModal(id) {
-    const data = modals[id];
-    const d = data[currentLang];
-    const problemLines = d.problem.split('\n').map(l => `<p>${l}</p>`).join('');
-    const didLines = d.did.split('\n').map(l => l ? `<p>${l}</p>` : '<p>&nbsp;</p>').join('');
-    const resultsHtml = d.results.map(r => `
-      <div class="modal-result-item">
-        <div class="modal-result-main">${r.main}</div>
-        <div class="modal-result-label">${r.label}</div>
-      </div>`).join('');
-
-    document.getElementById('modalContent').innerHTML = `
-      <div class="modal-num">${data.num}</div>
-      <h2 class="modal-title">${d.title}</h2>
-      <div class="modal-section">
-        <div class="modal-section-label">${currentLang === 'ko' ? '문제' : 'Problem'}</div>
-        <div class="modal-section-body">${problemLines}</div>
-      </div>
-      <div class="modal-section">
-        <div class="modal-section-label">${currentLang === 'ko' ? '내가 한 것' : 'What I Did'}</div>
-        <div class="modal-section-body">${didLines}</div>
-      </div>
-      <div class="modal-section">
-        <div class="modal-section-label">${currentLang === 'ko' ? '결과' : 'Result'}</div>
-        <div class="modal-result-grid">${resultsHtml}</div>
-      </div>
-    `;
-
-    document.getElementById('modalOverlay').classList.add('open');
-    document.body.style.overflow = 'hidden';
-  }
-
-  function closeModal() {
-    document.getElementById('modalOverlay').classList.remove('open');
-    document.body.style.overflow = '';
-  }
-
-  function closeModalOnBg(e) {
-    if (e.target === document.getElementById('modalOverlay')) closeModal();
-  }
-
-  document.addEventListener('keydown', e => {
-    if (e.key === 'Escape') closeModal();
+  await new Promise(res=>{
+    animTo(curSX,curSY,bcx-10,bcy-14,750,(x,y)=>{
+      MC.style.transform=`translate(${x}px,${y}px) scale(1)`;
+    },res);
   });
+  await delay(140);
+
+  bulbFlaring=true;
+  sndFlare();
+  await new Promise(res=>{
+    const st=performance.now();
+    const suck=now=>{
+      const t=Math.min(1,(now-st)/280);
+      MC.style.transform=`translate(${bcx-10}px,${bcy-14}px) scale(${1-t})`;
+      if(t<1) requestAnimationFrame(suck);
+      else{hideMC();res();}
+    };
+    requestAnimationFrame(suck);
+  });
+
+  sndWhoosh();
+  await new Promise(res=>{
+    const st=performance.now();
+    const dur=750;
+    const zoom=now=>{
+      const t=Math.min(1,(now-st)/dur);
+      const e=t*t*t;
+      zoomScale=1+e*10;
+      if(t<1) requestAnimationFrame(zoom);
+      else res();
+    };
+    requestAnimationFrame(zoom);
+  });
+
+  p1alive=false;
+  chaosC.style.display='none';
+  sx.fillStyle='rgba(215,224,255,1)';
+  sx.fillRect(0,0,W,H);
+
+  document.getElementById('p2').style.opacity='1';
+  await delay(200);
+
+  await new Promise(res=>{
+    let a=1;
+    const fade=()=>{
+      a=Math.max(0,a-0.028);
+      sx.clearRect(0,0,W,H);
+      if(a>0){sx.fillStyle=`rgba(215,224,255,${a})`;sx.fillRect(0,0,W,H);requestAnimationFrame(fade);}
+      else{sx.clearRect(0,0,W,H);res();}
+    };
+    requestAnimationFrame(fade);
+  });
+
+  for(let i=0;i<CORE.length;i++){
+    NEL[CORE[i].id].classList.add('on');
+    sndNodePop();
+    await delay(100);
+  }
+
+  for(let i=0;i<CLINES.length;i++){
+    const el=document.getElementById(CLINES[i].id);
+    if(el) el.style.strokeDashoffset='0';
+    sndLine();
+    ['s','e'].forEach((s,j)=>{
+      const d=document.getElementById(`dot_${CLINES[i].id}_${s}`);
+      if(d) setTimeout(()=>d.classList.add('on'),j*165);
+    });
+    await delay(75);
+  }
+
+  await delay(250);
+  document.getElementById('wf-stat').classList.add('on');
+  await delay(1415);
+
+  document.getElementById('wf-scene').style.transform='scale(0.44)';
+  ghostEls.forEach((el,i)=>setTimeout(()=>el.classList.add('on'),65+i*25));
+  ghostLines.forEach((l,i)=>setTimeout(()=>l.classList.add('on'),100+i*20));
+  await delay(1500);
+
+  const termEl=document.getElementById('term');
+  const termTitleBarY=CY-160-90;
+  const startTX=W*1.15;
+  termEl.style.transition='none';
+  termEl.style.transform=`translateX(${startTX}px)`;
+
+  document.getElementById('p3').style.opacity='1';
+  await delay(42);
+
+  showMC(W/2+startTX, termTitleBarY);
+  await delay(83);
+
+  const DRAG_DUR=750;
+  await new Promise(resolve=>{
+    const t0=performance.now();
+    const step=now=>{
+      const t=Math.min((now-t0)/DRAG_DUR,1);
+      const e=1-Math.pow(1-t,3);
+      const tx=startTX*(1-e);
+      termEl.style.transform=`translateX(${tx}px)`;
+      moveMCTo(W/2+tx-50, termTitleBarY);
+      if(t<1) requestAnimationFrame(step); else resolve();
+    };
+    requestAnimationFrame(step);
+  });
+
+  hideMC();
+  document.getElementById('p2').style.opacity='0';
+  await delay(250);
+
+  const tbody=document.getElementById('tbody');
+  for(const html of TLINES){
+    const span=document.createElement('span');
+    span.className='tl'; span.innerHTML=html;
+    tbody.appendChild(span);
+    tbody.scrollTop=tbody.scrollHeight;
+    if(html!=='') sndType();
+    await delay(html===''?38:35);
+  }
+
+  const finalLine=document.createElement('span');
+  finalLine.className='tl';
+  const prompt=document.createElement('span');
+  prompt.style.color='#818cf8'; prompt.textContent='$ ';
+  const typed=document.createElement('span');
+  const cur=document.createElement('span');
+  cur.className='tcur';
+  finalLine.appendChild(prompt); finalLine.appendChild(typed); finalLine.appendChild(cur);
+  tbody.appendChild(finalLine);
+  tbody.scrollTop=tbody.scrollHeight;
+
+  const RUN='run phosynd.com';
+  for(const ch of RUN){
+    await delay(45); typed.textContent+=ch;
+    sndType();
+    tbody.scrollTop=tbody.scrollHeight;
+  }
+
+  await delay(500);
+  document.getElementById('t-hint').style.opacity='1';
+  await delay(250);
+  document.getElementById('enterbtn').classList.add('show');
+}
+
+document.addEventListener('keydown',e=>{
+  if(e.key==='Enter'&&document.getElementById('enterbtn').classList.contains('show')) launchMain();
+});
+
+function launchMain(){
+  const opening=document.getElementById('opening-wrap');
+  opening.style.transition='opacity .8s';
+  opening.style.opacity='0';
+
+  setTimeout(()=>{
+    // Remove opening mode — restore scroll & cursor
+    document.documentElement.classList.remove('opening-mode');
+    document.body.style.cursor='';
+    document.body.style.background='';
+
+    // Show and fade in main content
+    const main=document.getElementById('main-wrap');
+    main.style.display='block';
+    requestAnimationFrame(()=>{
+      requestAnimationFrame(()=>{
+        main.classList.add('visible');
+      });
+    });
+
+    // Hide opening entirely after fade
+    setTimeout(()=>{
+      opening.style.display='none';
+    }, 900);
+
+    // Trigger hero reveal animations
+    document.querySelectorAll('#hero .reveal').forEach((el,i)=>{
+      setTimeout(()=>el.classList.add('visible'), 100+i*80);
+    });
+
+    // Setup nav scroll + scroll reveal for rest of page
+    const nav=document.getElementById('nav');
+    window.addEventListener('scroll',()=>{
+      nav.classList.toggle('scrolled', window.scrollY>40);
+    },{passive:true});
+
+    const revealEls=document.querySelectorAll('#main-wrap .reveal');
+    const observer=new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting){
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    },{threshold:0.12,rootMargin:'0px 0px -40px 0px'});
+    revealEls.forEach(el=>observer.observe(el));
+
+  }, 800);
+}
+
+run();
 </script>
 </body>
 </html>
