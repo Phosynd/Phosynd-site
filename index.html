@@ -146,6 +146,23 @@ canvas{position:fixed;top:0;left:0;display:block}
 .m-step-code-char{opacity:0;transition:opacity .25s ease}
 .m-card-in.in .m-step-code-char{opacity:.85}
 
+/* section tag line draw + tag fade */
+.m-section-reveal{display:inline-flex;align-items:center;gap:14px;opacity:0;transition:opacity .8s var(--m-ease)}
+.m-section-reveal.in{opacity:1}
+.m-section-reveal .m-line{
+  display:inline-block;width:0;height:1px;
+  background:var(--m-primary);
+  transition:width 1.1s var(--m-ease) .25s;
+}
+.m-section-reveal.in .m-line{width:84px}
+
+/* metric block char slide-up */
+.m-metric-char{
+  display:inline-block;opacity:0;transform:translateY(70%);
+  transition:opacity .55s var(--m-ease),transform .55s var(--m-ease);
+}
+.m-card-in.in .m-metric-char{opacity:1;transform:translateY(0)}
+
 /* ── nav ── */
 #m-nav{
   position:fixed;top:0;left:50%;transform:translateX(-50%);z-index:50;
@@ -192,8 +209,43 @@ canvas{position:fixed;top:0;left:0;display:block}
   position:absolute;top:-12%;right:-8%;
   width:60vw;height:60vw;max-width:780px;max-height:780px;
   border-radius:50%;pointer-events:none;
-  background:radial-gradient(circle,rgba(225,165,108,.32) 0%,rgba(120,80,42,.1) 40%,transparent 70%);
-  filter:blur(20px);
+  background:radial-gradient(circle,rgba(225,165,108,.4) 0%,rgba(140,90,48,.14) 40%,transparent 72%);
+  filter:blur(22px);
+  translate:0 var(--m-parallax,0);
+}
+.m-hero-orb-2{
+  position:absolute;bottom:-22%;left:-14%;
+  width:58vw;height:58vw;max-width:720px;max-height:720px;
+  border-radius:50%;pointer-events:none;
+  background:radial-gradient(circle,rgba(180,130,90,.26) 0%,rgba(80,55,32,.08) 42%,transparent 72%);
+  filter:blur(30px);
+  translate:0 var(--m-parallax,0);
+  animation:m-orb-drift 22s ease-in-out infinite;
+}
+@keyframes m-orb-drift{
+  0%,100%{transform:translate(0,0) scale(1)}
+  33%{transform:translate(7%,-4%) scale(1.08)}
+  66%{transform:translate(-5%,6%) scale(.94)}
+}
+.m-scroll-cue{
+  position:absolute;left:50%;bottom:26px;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:8px;
+  color:rgba(225,224,204,.55);
+  font-size:.58rem;letter-spacing:.26em;text-transform:uppercase;
+  z-index:3;cursor:pointer;text-decoration:none;
+  transition:color .25s,opacity .25s;
+}
+.m-scroll-cue:hover{color:#E1E0CC}
+.m-scroll-cue:hover .m-cue-line{background:linear-gradient(to bottom,rgba(225,224,204,0),rgba(225,224,204,.95))}
+.m-scroll-cue .m-cue-line{
+  width:1px;height:38px;
+  background:linear-gradient(to bottom,rgba(225,224,204,0),rgba(225,224,204,.6));
+  transform-origin:top;
+  animation:m-cue-line 1.9s ease-in-out infinite;
+}
+@keyframes m-cue-line{
+  0%,100%{opacity:.25;transform:scaleY(.35)}
+  50%{opacity:1;transform:scaleY(1)}
 }
 .m-hero-vignette{
   position:absolute;inset:0;pointer-events:none;
@@ -441,8 +493,9 @@ canvas{position:fixed;top:0;left:0;display:block}
 .m-contact-orb{
   position:absolute;bottom:-30%;left:50%;transform:translateX(-50%);
   width:900px;height:500px;max-width:90vw;
-  background:radial-gradient(ellipse,rgba(225,165,108,.12) 0%,transparent 70%);
+  background:radial-gradient(ellipse,rgba(225,165,108,.16) 0%,transparent 70%);
   pointer-events:none;
+  translate:0 var(--m-parallax,0);
 }
 .m-contact-inner{max-width:1240px;margin:0 auto;text-align:center;position:relative;z-index:1}
 .m-contact-tag{
@@ -481,6 +534,7 @@ canvas{position:fixed;top:0;left:0;display:block}
   #m-nav a{font-size:.7rem}
   #m-hero{padding:12px;min-height:96vh}
   .m-hero-content{padding:0 22px 26px}
+  .m-scroll-cue{display:none}
   .m-hero-meta{top:22px;left:24px;font-size:.55rem;gap:10px}
   .m-hero-grid{grid-template-columns:1fr;gap:32px}
   .m-hero-logotype{font-size:26vw}
@@ -563,7 +617,8 @@ canvas{position:fixed;top:0;left:0;display:block}
   <!-- HERO -->
   <section id="m-hero">
     <div class="m-hero-panel">
-      <div class="m-hero-orb m-orb-breathe"></div>
+      <div class="m-hero-orb m-orb-breathe" data-parallax="0.18"></div>
+      <div class="m-hero-orb-2" data-parallax="0.08"></div>
       <div class="m-hero-bg-grid"></div>
       <div class="m-hero-bg-grid-h"></div>
       <div class="m-noise"></div>
@@ -599,13 +654,18 @@ canvas{position:fixed;top:0;left:0;display:block}
           </div>
         </div>
       </div>
+
+      <a href="#m-about" class="m-scroll-cue" aria-label="다음 섹션으로">
+        <div class="m-cue-line"></div>
+        <span>Scroll</span>
+      </a>
     </div>
   </section>
 
   <!-- ABOUT -->
   <section id="m-about">
     <div class="m-about-card">
-      <div class="m-about-tag">/ About — 최관혁</div>
+      <div class="m-about-tag m-section-reveal">/ About — 최관혁<span class="m-line"></span></div>
       <div class="m-about-grid">
         <div>
           <h2 class="m-about-headline m-pu" data-pu-stagger=".07">
@@ -649,6 +709,7 @@ canvas{position:fixed;top:0;left:0;display:block}
   <section id="m-work">
     <div class="m-noise-soft"></div>
     <div class="m-work-inner">
+      <div class="m-about-tag m-section-reveal" style="margin-bottom:24px">/ Selected Work<span class="m-line"></span></div>
       <div class="m-work-header">
         <h2 class="m-work-headline m-pu" data-pu-stagger=".055">
           <span class="m-pu-word"><span class="m-pu-word-inner m-primary">현장에서</span></span>
@@ -723,6 +784,7 @@ canvas{position:fixed;top:0;left:0;display:block}
   <!-- PROCESS -->
   <section id="m-process">
     <div class="m-process-inner">
+      <div class="m-about-tag m-section-reveal" style="margin-bottom:24px">/ Process — 6 nodes<span class="m-line"></span></div>
       <div class="m-process-strip">
         <div class="m-process-cell m-card-in" data-card-idx="0">
           <span class="m-step">01 · Trigger</span>
@@ -762,7 +824,7 @@ canvas{position:fixed;top:0;left:0;display:block}
   <footer id="m-contact">
     <div class="m-contact-orb m-orb-breathe"></div>
     <div class="m-contact-inner">
-      <div class="m-contact-tag">/ Contact</div>
+      <div class="m-contact-tag m-section-reveal" style="justify-content:center">/ Contact<span class="m-line"></span></div>
       <h2 class="m-contact-headline m-pu" data-pu-stagger=".08">
         <span class="m-pu-word"><span class="m-pu-word-inner">여기까지</span></span>
         <span class="m-pu-word"><span class="m-pu-word-inner">읽으셨다면,</span></span>
@@ -1448,6 +1510,19 @@ function setupMainContent(){
     });
   });
 
+  // 3b) Work metric block chars slide up (count-up feel)
+  document.querySelectorAll('#main-wrap .m-work-metric-block').forEach(el=>{
+    const text=el.textContent.trim();
+    el.textContent='';
+    Array.from(text).forEach((ch,i)=>{
+      const sp=document.createElement('span');
+      sp.className='m-metric-char';
+      sp.style.transitionDelay=(0.3+i*0.055)+'s';
+      sp.textContent=ch;
+      el.appendChild(sp);
+    });
+  });
+
   // 4) Hero — trigger immediately
   const heroPu=document.querySelector('#m-hero .m-pu');
   if(heroPu) heroPu.classList.add('m-pu-active');
@@ -1456,41 +1531,77 @@ function setupMainContent(){
     setTimeout(()=>el.classList.add('in'), 60);
   });
 
-  // 5) IntersectionObserver for sections below the fold
-  // Lower threshold + smaller bottom margin = earlier, more reliable triggers
-  const fire=t=>{
-    if(t.classList.contains('m-pu')) t.classList.add('m-pu-active');
-    else t.classList.add('in');
-  };
-  const io=new IntersectionObserver((entries)=>{
-    entries.forEach(entry=>{
-      if(entry.isIntersecting){ fire(entry.target); io.unobserve(entry.target); }
-    });
-  },{threshold:0.08,rootMargin:'0px 0px -6% 0px'});
-
-  const observeAll=()=>{
-    document.querySelectorAll('#main-wrap .m-pu').forEach(el=>{ if(el.closest('#m-hero')) return; if(!el.classList.contains('m-pu-active')) io.observe(el); });
-    document.querySelectorAll('#main-wrap .m-fade-up').forEach(el=>{ if(el.closest('#m-hero')) return; if(!el.classList.contains('in')) io.observe(el); });
-    document.querySelectorAll('#main-wrap .m-card-in').forEach(el=>{ if(!el.classList.contains('in')) io.observe(el); });
-  };
-  observeAll();
-
-  // 6) Safety net — anything in or near viewport after 1.2s gets forced on,
-  //    so we never end up with a page of invisible content if observer misses.
-  const sweep=(margin)=>{
+  // 5) Reveal-on-scroll — primary mechanism (scroll handler, rAF-throttled).
+  //    Simple, deterministic, works in every browser. Triggers as soon as
+  //    any part of the element crosses the 92% viewport line.
+  const reveal=()=>{
+    const vh=window.innerHeight;
+    const limit=vh*0.92;
     document.querySelectorAll('#main-wrap .m-pu:not(.m-pu-active)').forEach(el=>{
+      if(el.closest('#m-hero')) return;
       const r=el.getBoundingClientRect();
-      if(r.top<window.innerHeight*margin) el.classList.add('m-pu-active');
+      if(r.top<limit && r.bottom>0) el.classList.add('m-pu-active');
     });
-    document.querySelectorAll('#main-wrap .m-fade-up:not(.in), #main-wrap .m-card-in:not(.in)').forEach(el=>{
+    document.querySelectorAll('#main-wrap .m-fade-up:not(.in)').forEach(el=>{
+      if(el.closest('#m-hero')) return;
       const r=el.getBoundingClientRect();
-      if(r.top<window.innerHeight*margin) el.classList.add('in');
+      if(r.top<limit && r.bottom>0) el.classList.add('in');
+    });
+    document.querySelectorAll('#main-wrap .m-card-in:not(.in)').forEach(el=>{
+      const r=el.getBoundingClientRect();
+      if(r.top<limit && r.bottom>0) el.classList.add('in');
+    });
+    document.querySelectorAll('#main-wrap .m-section-reveal:not(.in)').forEach(el=>{
+      const r=el.getBoundingClientRect();
+      if(r.top<limit && r.bottom>0) el.classList.add('in');
     });
   };
-  setTimeout(()=>sweep(1.2), 1200);
-  setTimeout(()=>sweep(3.0), 4000);
+  let _scrollRaf=null;
+  const onScroll=()=>{
+    if(_scrollRaf) return;
+    _scrollRaf=requestAnimationFrame(()=>{ _scrollRaf=null; reveal(); });
+  };
+  window.addEventListener('scroll',onScroll,{passive:true});
+  window.addEventListener('resize',onScroll,{passive:true});
+  // Run immediately + after main becomes visible
+  reveal();
+  setTimeout(reveal, 200);
+  setTimeout(reveal, 900);
 
-  // 7) Smooth-scroll for in-page anchor nav
+  // 6) Belt-and-braces final sweep — force-show anything above viewport+50%
+  //    after 1.5s in case scroll handler missed something at extreme zoom.
+  setTimeout(()=>{
+    const limit=window.innerHeight*1.5;
+    document.querySelectorAll('#main-wrap .m-pu:not(.m-pu-active)').forEach(el=>{
+      if(el.getBoundingClientRect().top<limit) el.classList.add('m-pu-active');
+    });
+    document.querySelectorAll('#main-wrap .m-fade-up:not(.in), #main-wrap .m-card-in:not(.in), #main-wrap .m-section-reveal:not(.in)').forEach(el=>{
+      if(el.getBoundingClientRect().top<limit) el.classList.add('in');
+    });
+  }, 1500);
+
+  // 7) Parallax — slow drift of bg orbs based on scroll
+  const parallaxEls=[
+    ...document.querySelectorAll('#main-wrap .m-hero-orb'),
+    ...document.querySelectorAll('#main-wrap .m-hero-orb-2'),
+    ...document.querySelectorAll('#main-wrap .m-contact-orb'),
+  ];
+  let _pxRaf=null;
+  const onParallax=()=>{
+    if(_pxRaf) return;
+    _pxRaf=requestAnimationFrame(()=>{
+      _pxRaf=null;
+      const y=window.scrollY;
+      parallaxEls.forEach(el=>{
+        const speed=parseFloat(el.getAttribute('data-parallax')||'0.12');
+        el.style.setProperty('--m-parallax',(-y*speed)+'px');
+      });
+    });
+  };
+  window.addEventListener('scroll',onParallax,{passive:true});
+  onParallax();
+
+  // 8) Smooth-scroll for in-page anchor nav
   document.querySelectorAll('#main-wrap a[href^="#m-"]').forEach(a=>{
     a.addEventListener('click',(e)=>{
       const id=a.getAttribute('href').slice(1);
