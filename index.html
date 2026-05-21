@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
-<link href="https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&family=Noto+Sans+KR:wght@300;400;500;700&family=Noto+Serif+KR:wght@300;400;500&family=Instrument+Serif:ital@0;1&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 <style>
 /* ── OPENING MODE ── */
 html.opening-mode,
@@ -74,7 +74,7 @@ canvas{position:fixed;top:0;left:0;display:block}
 #main-wrap{
   display:none;opacity:0;transition:opacity .8s ease;
   background:#000;color:#E1E0CC;
-  font-family:'Almarai','Pretendard Variable','Pretendard','Noto Sans KR',-apple-system,BlinkMacSystemFont,sans-serif;
+  font-family:'Pretendard Variable','Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
   font-weight:400;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
   min-height:100vh;overflow-x:hidden;
   --m-text:#E1E0CC;
@@ -101,7 +101,7 @@ canvas{position:fixed;top:0;left:0;display:block}
 
 .m-serif{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400}
 .m-mono{font-family:'DM Mono',monospace}
-.m-kr-italic{font-family:'Noto Serif KR','Pretendard Variable',serif;font-weight:300;font-style:italic;letter-spacing:-.01em}
+.m-kr-italic{font-weight:300;font-style:italic;letter-spacing:-.005em;color:#E1E0CC}
 
 .m-noise{
   position:absolute;inset:0;pointer-events:none;
@@ -119,13 +119,32 @@ canvas{position:fixed;top:0;left:0;display:block}
 .m-pu-word-inner{display:inline-block;transform:translateY(110%);opacity:0;transition:transform .9s var(--m-ease),opacity .9s var(--m-ease);will-change:transform,opacity}
 .m-pu-active .m-pu-word-inner{transform:translateY(0);opacity:1}
 
-.m-fade-up{opacity:0;transform:translateY(20px);transition:opacity .9s var(--m-ease),transform .9s var(--m-ease)}
+.m-fade-up{opacity:0;transform:translateY(22px);transition:opacity .9s var(--m-ease),transform .9s var(--m-ease)}
 .m-fade-up.in{opacity:1;transform:translateY(0)}
 
-.m-card-in{opacity:0;transform:scale(.96);transition:opacity 1s var(--m-ease),transform 1s var(--m-ease);will-change:transform,opacity}
-.m-card-in.in{opacity:1;transform:scale(1)}
+.m-card-in{opacity:0;transform:translateY(28px) scale(.97);transition:opacity 1s var(--m-ease),transform 1s var(--m-ease);will-change:transform,opacity}
+.m-card-in.in{opacity:1;transform:translateY(0) scale(1)}
 
 .m-scroll-letter{transition:opacity .25s linear;opacity:.22}
+
+/* ambient orb breathing */
+@keyframes m-orb-breathe{
+  0%,100%{transform:scale(1) translate(0,0);opacity:.85}
+  50%{transform:scale(1.08) translate(-1.5%,1%);opacity:1}
+}
+.m-orb-breathe{animation:m-orb-breathe 9s ease-in-out infinite;will-change:transform,opacity}
+
+/* metric block glow on view */
+@keyframes m-metric-glow{
+  0%{box-shadow:0 0 0 0 rgba(222,219,200,.0);transform:scale(.92)}
+  60%{box-shadow:0 0 0 8px rgba(222,219,200,.12);transform:scale(1.03)}
+  100%{box-shadow:0 0 0 0 rgba(222,219,200,0);transform:scale(1)}
+}
+.m-card-in.in .m-work-metric-block{animation:m-metric-glow 1.4s var(--m-ease) .25s both}
+
+/* process code reveal */
+.m-step-code-char{opacity:0;transition:opacity .25s ease}
+.m-card-in.in .m-step-code-char{opacity:.85}
 
 /* ── nav ── */
 #m-nav{
@@ -198,9 +217,9 @@ canvas{position:fixed;top:0;left:0;display:block}
   display:grid;grid-template-columns:1.4fr 1fr;gap:48px;align-items:end;
 }
 .m-hero-logotype{
-  font-family:'Almarai',sans-serif;font-weight:500;
+  font-family:'Pretendard Variable','Pretendard',sans-serif;font-weight:500;
   font-size:clamp(5.5rem,17vw,17rem);
-  line-height:.86;letter-spacing:-.06em;color:#E1E0CC;
+  line-height:.86;letter-spacing:-.055em;color:#E1E0CC;
   position:relative;display:inline-block;
 }
 .m-hero-logotype .m-asterisk{
@@ -215,23 +234,29 @@ canvas{position:fixed;top:0;left:0;display:block}
   line-height:1.55;color:rgba(225,224,204,.75);
   max-width:380px;
 }
-.m-hero-sub .m-em{color:var(--m-primary);font-family:'Instrument Serif',serif;font-style:italic;font-size:1.05em}
+.m-hero-sub .m-em{color:var(--m-primary);font-weight:300;font-style:italic;letter-spacing:-.005em}
 .m-hero-cta{
   display:inline-flex;align-items:center;gap:10px;
-  background:var(--m-primary);color:#000;
+  background:var(--m-primary);color:#1a1410;
   border-radius:999px;padding:7px 8px 7px 22px;
-  font-size:.95rem;font-weight:500;width:fit-content;
-  transition:gap .35s var(--m-ease);
-  cursor:pointer;
+  font-size:.95rem;font-weight:500;width:fit-content;letter-spacing:-.005em;
+  transition:gap .35s var(--m-ease),background .25s,box-shadow .35s;
+  cursor:pointer;position:relative;
+  box-shadow:0 0 0 0 rgba(225,224,204,0);
+  animation:m-cta-pulse 3s ease-in-out infinite;
 }
-.m-hero-cta:hover{gap:16px}
+.m-hero-cta:hover{gap:16px;background:#ECEAD9;animation-play-state:paused;box-shadow:0 0 0 8px rgba(225,224,204,.08)}
 .m-hero-cta .m-cta-circle{
-  background:#000;border-radius:999px;width:38px;height:38px;
+  background:#1a1410;border-radius:999px;width:38px;height:38px;
   display:flex;align-items:center;justify-content:center;
   transition:transform .35s var(--m-ease);
   color:var(--m-primary);
 }
 .m-hero-cta:hover .m-cta-circle{transform:scale(1.1)}
+@keyframes m-cta-pulse{
+  0%,100%{box-shadow:0 0 0 0 rgba(225,224,204,0)}
+  50%{box-shadow:0 0 0 6px rgba(225,224,204,.07)}
+}
 
 /* ── about ── */
 #m-about{
@@ -261,10 +286,18 @@ canvas{position:fixed;top:0;left:0;display:block}
   color:rgba(225,224,204,.95);
 }
 .m-about-body{
-  font-size:.95rem;line-height:1.8;
-  color:rgba(225,224,204,.55);
-  max-width:520px;
+  display:flex;flex-direction:column;gap:24px;
+  max-width:540px;
 }
+.m-about-body p{
+  font-size:.96rem;line-height:1.85;
+  color:rgba(225,224,204,.62);
+  margin:0;letter-spacing:-.005em;
+}
+.m-about-body p strong{
+  color:var(--m-primary);font-weight:500;
+}
+.m-about-body p .m-kr-italic{color:var(--m-primary)}
 .m-about-photo{
   position:relative;border-radius:18px;overflow:hidden;
   aspect-ratio:4/5;background:#0a0a0a;
@@ -334,7 +367,7 @@ canvas{position:fixed;top:0;left:0;display:block}
   position:absolute;left:0;right:0;bottom:0;padding:24px 26px;
   font-size:1rem;color:#E1E0CC;line-height:1.45;
 }
-.m-work-card-tagline .m-tag-em{font-family:'Instrument Serif',serif;font-style:italic;color:var(--m-primary)}
+.m-work-card-tagline .m-tag-em{font-weight:300;font-style:italic;color:var(--m-primary);letter-spacing:-.005em}
 .m-work-head{
   display:flex;justify-content:space-between;align-items:flex-start;
   margin-bottom:28px;
@@ -530,7 +563,7 @@ canvas{position:fixed;top:0;left:0;display:block}
   <!-- HERO -->
   <section id="m-hero">
     <div class="m-hero-panel">
-      <div class="m-hero-orb"></div>
+      <div class="m-hero-orb m-orb-breathe"></div>
       <div class="m-hero-bg-grid"></div>
       <div class="m-hero-bg-grid-h"></div>
       <div class="m-noise"></div>
@@ -551,8 +584,11 @@ canvas{position:fixed;top:0;left:0;display:block}
           </div>
           <div class="m-hero-side">
             <p class="m-hero-sub m-fade-up">
-              Phosynd는 <span class="m-em">본질을 먼저 읽고 구조를 바꾸는</span> 한 사람의 작업장입니다.
-              데이터, 자동화, 콘텐츠를 엮어 문제 자체를 다시 정의합니다.
+              Phosynd는 <span class="m-em">한 사람의 사고방식</span>이자 작업장입니다.<br>
+              본질을 먼저 읽고, 구조를 바꾸는 일.
+              <br><br>
+              데이터 · 자동화 · 콘텐츠를 엮어<br>
+              문제 자체를 다시 정의합니다.
             </p>
             <a href="#m-about" class="m-hero-cta m-fade-up">
               <span>최관혁 알아보기</span>
@@ -577,15 +613,27 @@ canvas{position:fixed;top:0;left:0;display:block}
             <span class="m-pu-word"><span class="m-pu-word-inner">최관혁,</span></span>
             <span class="m-pu-word"><span class="m-pu-word-inner m-kr-italic">본질을 먼저 읽고</span></span>
             <span class="m-pu-word"><span class="m-pu-word-inner m-kr-italic">구조를 바꾸는</span></span>
-            <span class="m-pu-word"><span class="m-pu-word-inner">PM입니다.</span></span>
-            <span class="m-pu-word"><span class="m-pu-word-inner">22세,</span></span>
+            <span class="m-pu-word"><span class="m-pu-word-inner">사람입니다.</span></span>
+            <span class="m-pu-word"><span class="m-pu-word-inner">24세,</span></span>
             <span class="m-pu-word"><span class="m-pu-word-inner">기획 · 데이터 ·</span></span>
             <span class="m-pu-word"><span class="m-pu-word-inner">자동화를 엮어</span></span>
             <span class="m-pu-word"><span class="m-pu-word-inner">결과로 증명합니다.</span></span>
           </h2>
-          <p class="m-about-body m-scroll-text">
-            영상 콘텐츠 7년의 시선을 바탕으로 데이터 분석과 AI 자동화를 결합합니다. 한 분기에 매출 $616K → $1.07M(+74.48%)을 전환했고, 반복 업무 300시간/월을 99.9% 절감했으며, 메타 전환광고 200개 중 7위로 신입 단독 1위를 기록했습니다. 표면을 다듬는 일보다, 잘못 정의된 문제 자체를 다시 짜는 일을 좋아합니다.
-          </p>
+          <div class="m-about-body">
+            <p class="m-fade-up" data-fade-idx="0">
+              영상 콘텐츠 7년의 시선을 바탕으로<br>
+              데이터 분석과 AI 자동화를 결합합니다.
+            </p>
+            <p class="m-fade-up" data-fade-idx="1">
+              한 분기에 매출 <strong>$616K → $1.07M (+74.48%)</strong> 을 전환했고,<br>
+              반복 업무 <strong>300시간/월을 99.9%</strong> 절감했으며,<br>
+              메타 전환광고 200개 중 <strong>7위, 신입 단독 1위</strong> 를 기록했습니다.
+            </p>
+            <p class="m-fade-up" data-fade-idx="2">
+              표면을 다듬는 일보다<br>
+              <span class="m-kr-italic">잘못 정의된 문제 자체</span> 를 다시 짜는 일을 좋아합니다.
+            </p>
+          </div>
         </div>
         <div class="m-about-photo m-fade-up">
           <img src="./assets/photo.jpg" alt="최관혁" onerror="this.style.opacity='0'">
@@ -712,7 +760,7 @@ canvas{position:fixed;top:0;left:0;display:block}
 
   <!-- CONTACT -->
   <footer id="m-contact">
-    <div class="m-contact-orb"></div>
+    <div class="m-contact-orb m-orb-breathe"></div>
     <div class="m-contact-inner">
       <div class="m-contact-tag">/ Contact</div>
       <h2 class="m-contact-headline m-pu" data-pu-stagger=".08">
@@ -1365,7 +1413,7 @@ document.addEventListener('keydown',e=>{
 });
 
 // ═══════════════════════════════════════════════════
-// MAIN CONTENT REVEAL — pull-up words, fade-ups, cards, scroll-letter
+// MAIN CONTENT REVEAL — pull-up words, fade-ups, cards, code char reveal
 // ═══════════════════════════════════════════════════
 function setupMainContent(){
   // 1) Pull-up word stagger delays
@@ -1381,7 +1429,26 @@ function setupMainContent(){
     el.style.transitionDelay=(idx*0.12)+'s';
   });
 
-  // 3) Hero — trigger immediately
+  // 2b) Fade-up stagger by data-fade-idx
+  document.querySelectorAll('#main-wrap .m-fade-up[data-fade-idx]').forEach(el=>{
+    const idx=parseInt(el.getAttribute('data-fade-idx')||'0',10);
+    el.style.transitionDelay=(idx*0.18)+'s';
+  });
+
+  // 3) Process code char-by-char reveal (waits for parent .m-card-in.in)
+  document.querySelectorAll('#main-wrap .m-step-code').forEach(el=>{
+    const text=el.textContent;
+    el.textContent='';
+    Array.from(text).forEach((ch,i)=>{
+      const sp=document.createElement('span');
+      sp.className='m-step-code-char';
+      sp.style.transitionDelay=(0.35+i*0.025)+'s';
+      sp.textContent=ch;
+      el.appendChild(sp);
+    });
+  });
+
+  // 4) Hero — trigger immediately
   const heroPu=document.querySelector('#m-hero .m-pu');
   if(heroPu) heroPu.classList.add('m-pu-active');
   document.querySelectorAll('#m-hero .m-fade-up').forEach((el,i)=>{
@@ -1389,59 +1456,49 @@ function setupMainContent(){
     setTimeout(()=>el.classList.add('in'), 60);
   });
 
-  // 4) IntersectionObserver for sections below the fold
+  // 5) IntersectionObserver for sections below the fold
+  // Lower threshold + smaller bottom margin = earlier, more reliable triggers
+  const fire=t=>{
+    if(t.classList.contains('m-pu')) t.classList.add('m-pu-active');
+    else t.classList.add('in');
+  };
   const io=new IntersectionObserver((entries)=>{
     entries.forEach(entry=>{
-      if(entry.isIntersecting){
-        const t=entry.target;
-        if(t.classList.contains('m-pu')) t.classList.add('m-pu-active');
-        else t.classList.add('in');
-        io.unobserve(t);
-      }
+      if(entry.isIntersecting){ fire(entry.target); io.unobserve(entry.target); }
     });
-  },{threshold:0.15,rootMargin:'0px 0px -40px 0px'});
+  },{threshold:0.08,rootMargin:'0px 0px -6% 0px'});
 
-  document.querySelectorAll('#main-wrap .m-pu').forEach(el=>{ if(el.closest('#m-hero')) return; io.observe(el); });
-  document.querySelectorAll('#main-wrap .m-fade-up').forEach(el=>{ if(el.closest('#m-hero')) return; io.observe(el); });
-  document.querySelectorAll('#main-wrap .m-card-in').forEach(el=>io.observe(el));
+  const observeAll=()=>{
+    document.querySelectorAll('#main-wrap .m-pu').forEach(el=>{ if(el.closest('#m-hero')) return; if(!el.classList.contains('m-pu-active')) io.observe(el); });
+    document.querySelectorAll('#main-wrap .m-fade-up').forEach(el=>{ if(el.closest('#m-hero')) return; if(!el.classList.contains('in')) io.observe(el); });
+    document.querySelectorAll('#main-wrap .m-card-in').forEach(el=>{ if(!el.classList.contains('in')) io.observe(el); });
+  };
+  observeAll();
 
-  // 5) Scroll-linked letter opacity for .m-scroll-text
-  document.querySelectorAll('#main-wrap .m-scroll-text').forEach(p=>{
-    const text=p.textContent.trim().replace(/\s+/g,' ');
-    p.textContent='';
-    const chars=[];
-    for(const ch of text){
-      const sp=document.createElement('span');
-      sp.className='m-scroll-letter';
-      sp.textContent=ch;
-      if(ch===' ') sp.style.whiteSpace='pre';
-      p.appendChild(sp);
-      chars.push(sp);
-    }
-    const update=()=>{
-      const rect=p.getBoundingClientRect();
-      const vh=window.innerHeight;
-      const startY=0.8*vh;
-      const endY=0.2*vh;
-      const total=startY-(endY-rect.height);
-      const traveled=startY-rect.top;
-      let prog=traveled/total;
-      if(!isFinite(prog)) prog=0;
-      prog=Math.max(0,Math.min(1,prog));
-      const len=chars.length;
-      chars.forEach((node,i)=>{
-        const cp=i/len;
-        const lo=cp-0.1, hi=cp+0.05;
-        let local;
-        if(prog<=lo) local=0;
-        else if(prog>=hi) local=1;
-        else local=(prog-lo)/(hi-lo);
-        node.style.opacity=(0.22+0.78*local).toFixed(3);
-      });
-    };
-    window.addEventListener('scroll',update,{passive:true});
-    window.addEventListener('resize',update);
-    update();
+  // 6) Safety net — anything in or near viewport after 1.2s gets forced on,
+  //    so we never end up with a page of invisible content if observer misses.
+  const sweep=(margin)=>{
+    document.querySelectorAll('#main-wrap .m-pu:not(.m-pu-active)').forEach(el=>{
+      const r=el.getBoundingClientRect();
+      if(r.top<window.innerHeight*margin) el.classList.add('m-pu-active');
+    });
+    document.querySelectorAll('#main-wrap .m-fade-up:not(.in), #main-wrap .m-card-in:not(.in)').forEach(el=>{
+      const r=el.getBoundingClientRect();
+      if(r.top<window.innerHeight*margin) el.classList.add('in');
+    });
+  };
+  setTimeout(()=>sweep(1.2), 1200);
+  setTimeout(()=>sweep(3.0), 4000);
+
+  // 7) Smooth-scroll for in-page anchor nav
+  document.querySelectorAll('#main-wrap a[href^="#m-"]').forEach(a=>{
+    a.addEventListener('click',(e)=>{
+      const id=a.getAttribute('href').slice(1);
+      const tgt=document.getElementById(id);
+      if(!tgt) return;
+      e.preventDefault();
+      tgt.scrollIntoView({behavior:'smooth',block:'start'});
+    });
   });
 }
 
