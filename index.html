@@ -194,6 +194,8 @@ function Hero() {
         <div className="noise-overlay absolute inset-0 opacity-[0.7] mix-blend-overlay pointer-events-none" />
         {/* Gradient overlays */}
         <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/60 pointer-events-none" />
+        {/* Right-side darkening for paragraph readability (lg+ where text sits on the right) */}
+        <div className="hidden lg:block absolute inset-0 bg-gradient-to-l from-black/65 via-black/20 to-transparent pointer-events-none" />
 
         {/* Navbar */}
         <nav className="absolute top-0 left-1/2 -translate-x-1/2 z-20">
@@ -269,12 +271,19 @@ function Hero() {
 function Statement() {
   return (
     <section className="bg-black px-4 md:px-6 py-20 md:py-32">
-      <div className="bg-[#101010] max-w-6xl mx-auto rounded-2xl md:rounded-[2rem] px-6 sm:px-10 md:px-16 py-16 sm:py-20 md:py-28 text-center">
-        <div className="text-primary text-[10px] sm:text-xs tracking-widest uppercase mb-8 sm:mb-12">
+      <div className="relative overflow-hidden bg-[#101010] max-w-6xl mx-auto rounded-2xl md:rounded-[2rem] px-6 sm:px-10 md:px-16 py-16 sm:py-20 md:py-28 text-center">
+        {/* Subtle noise texture */}
+        <div className="absolute inset-0 noise-overlay opacity-[0.03] pointer-events-none" />
+        {/* Faint top-center radial light */}
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{ background: 'radial-gradient(circle at 50% 30%, rgba(255,255,255,0.03), transparent 70%)' }}
+        />
+        <div className="relative text-primary text-[10px] sm:text-xs tracking-widest uppercase mb-8 sm:mb-12">
           Statement
         </div>
 
-        <div className="max-w-4xl mx-auto leading-[1.5]" style={{ color: '#E1E0CC' }}>
+        <div className="relative max-w-4xl mx-auto leading-[1.5]" style={{ color: '#E1E0CC' }}>
           <BlocksPullUp
             blocks={[
               <p className="font-normal mb-10 sm:mb-14 text-base sm:text-lg md:text-xl lg:text-2xl">
